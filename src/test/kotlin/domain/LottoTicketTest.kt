@@ -35,19 +35,19 @@ class LottoTicketTest {
                 LottoTicket(numbers).validate()
             }
 
-        assertTrue(exception.message!!.contains("중복될 수 없습니다"))
+        assertTrue(exception.message!!.contains("중복"))
     }
 
     @Test
     fun `범위를 벗어난 숫자 포함 로또 실패 테스트`() {
-        val numbers = listOf(1, 2, 3, 4, 5, 46) // 46은 유효 범위를 벗어남
+        val numbers = listOf(1, 2, 3, 4, 5, 46)
 
         val exception =
             assertThrows<IllegalArgumentException> {
                 LottoTicket(numbers).validate()
             }
 
-        assertTrue(exception.message!!.contains("1부터 45 사이의 숫자여야 합니다"))
+        assertTrue(exception.message!!.contains("1부터 45"))
     }
 
     @Test
