@@ -1,6 +1,6 @@
 package org.example.domain
 
-class LottoTicket(private val numbers: List<Int>) {
+class LottoTicket(val numbers: List<Int>) {
     fun validate(): Boolean {
         if (numbers.size != 6) {
             return false
