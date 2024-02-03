@@ -2,17 +2,9 @@ package org.example.domain
 
 open class LottoTicket(val numbers: List<Int>) {
     open fun validate(): Boolean {
-        if (numbers.size != 6) {
-            throw IllegalArgumentException("로또 번호는 6개여야 합니다")
-        }
-
-        if (numbers.toSet().size != 6) {
-            throw IllegalArgumentException("로또 번호는 중복될 수 없습니다")
-        }
-
-        if (numbers.any { it !in 1..45 }) {
-            throw IllegalArgumentException("로또 번호는 1부터 45 사이의 숫자여야 합니다")
-        }
+        require(numbers.size == 6) { "로또 번호는 6개여야 합니다" }
+        require(numbers.toSet().size == 6) { "로또 번호는 중복되지 않아야 합니다" }
+        require(numbers.all { it in 1..45 }) { "로또 번호는 1부터 45 사이여야 합니다" }
 
         return true
     }
