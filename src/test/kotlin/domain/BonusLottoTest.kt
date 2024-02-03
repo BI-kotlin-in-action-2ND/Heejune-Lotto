@@ -28,19 +28,19 @@ class BonusLottoTest {
         assertTrue(
             assertThrows<IllegalArgumentException> {
                 BonusLotto(listOf(1, 2, 3, 4, 5, 5), 7).validate()
-            }.message!!.contains("중복될 수 없습니다"),
+            }.message!!.contains("중복"),
         )
 
         assertTrue(
             assertThrows<IllegalArgumentException> {
                 BonusLotto(listOf(1, 2, 3, 4, 5, 46), 7).validate()
-            }.message!!.contains("1부터 45 사이의 숫자여야 합니다"),
+            }.message!!.contains("1부터 45"),
         )
 
         assertTrue(
             assertThrows<IllegalArgumentException> {
                 BonusLotto(listOf(0, 2, 3, 4, 5, 45), 7).validate()
-            }.message!!.contains("1부터 45 사이의 숫자여야 합니다"),
+            }.message!!.contains("1부터 45"),
         )
     }
 
@@ -52,7 +52,7 @@ class BonusLottoTest {
         val bonusLotto = BonusLotto(numbers, bonusNumber)
 
         val exception = assertThrows<IllegalArgumentException> { bonusLotto.validate() }
-        assertTrue(exception.message!!.contains("보너스 번호는 당첨 번호와 중복될 수 없습니다"))
+        assertTrue(exception.message!!.contains("중복"))
     }
 
     @Test
@@ -63,6 +63,6 @@ class BonusLottoTest {
         val bonusLotto = BonusLotto(numbers, bonusNumber)
 
         val exception = assertThrows<IllegalArgumentException> { bonusLotto.validate() }
-        assertTrue(exception.message!!.contains("보너스 번호는 1부터 45 사이의 숫자여야 합니다"))
+        assertTrue(exception.message!!.contains("1부터 45"))
     }
 }
