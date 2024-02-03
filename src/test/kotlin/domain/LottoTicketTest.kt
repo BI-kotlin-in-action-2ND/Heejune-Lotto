@@ -3,45 +3,51 @@ package domain
 import org.example.domain.LottoTicket
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class LottoTicketTest {
     @Test
     fun `6개 고유 숫자 로또 티켓 유효성 테스트`() {
-        // Given
         val numbers = listOf(1, 2, 3, 4, 5, 6)
         val lottoTicket = LottoTicket(numbers)
 
-        // When
-        val isValid = lottoTicket.validate()
-
-        // Then
-        assertTrue(isValid)
+        assertDoesNotThrow { lottoTicket.validate() }
     }
 
     @Test
     fun `6개 미만 숫자 로또 실패 테스트`() {
-        // Given
         val numbers = listOf(1, 2, 3, 4, 5)
-        val lottoTicket = LottoTicket(numbers)
 
-        // When
-        val isValid = lottoTicket.validate()
+        val exception =
+            assertThrows<IllegalArgumentException> {
+                LottoTicket(numbers).validate()
+            }
 
-        // Then
-        assertFalse(isValid)
+        assertTrue(exception.message!!.contains("6개여야 합니다"))
     }
 
     @Test
     fun `중복 숫자 포함 로또 실패 테스트`() {
-        // Given
         val numbers = listOf(1, 2, 3, 4, 5, 5)
-        val lottoTicket = LottoTicket(numbers)
 
-        // When
-        val isValid = lottoTicket.validate()
+        val exception =
+            assertThrows<IllegalArgumentException> {
+                LottoTicket(numbers).validate()
+            }
 
-        // Then
-        assertFalse(isValid)
+        assertTrue(exception.message!!.contains("중복될 수 없습니다"))
+    }
+
+    @Test
+    fun `범위를 벗어난 숫자 포함 로또 실패 테스트`() {
+        val numbers = listOf(1, 2, 3, 4, 5, 46) // 46은 유효 범위를 벗어남
+
+        val exception =
+            assertThrows<IllegalArgumentException> {
+                LottoTicket(numbers).validate()
+            }
+
+        assertTrue(exception.message!!.contains("1부터 45 사이의 숫자여야 합니다"))
     }
 
     @Test
