@@ -1,6 +1,11 @@
 package org.example.config
 
+import org.example.domain.generator.AutoLottoGenerator
+import org.example.view.InputView
+import org.example.view.OutputView
+
 class AppConfig {
-    val inputView = org.example.view.InputView
-    val outputView = org.example.view.OutputView
+    val inputView = InputView
+    val outputView = OutputView
+    val autoLottoGenerator = AutoLottoGenerator()
 }
