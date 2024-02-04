@@ -12,10 +12,12 @@ import org.example.view.OutputView
 class GameController(
     private val inputView: InputView,
     private val outputView: OutputView,
+    private val autoLottoGenerator: AutoLottoGenerator,
 ) {
     constructor(config: AppConfig) : this(
         config.inputView,
         config.outputView,
+        config.autoLottoGenerator,
     )
 
     fun start() {
@@ -61,9 +63,8 @@ class GameController(
             return WinningLotto(winningLotto, bonusNumber)
         } catch (e: IllegalArgumentException) {
             outputView.displayInvalidInput(e.message)
-            lotteWinningNumbers()
+            return lotteWinningNumbers()
         }
-        return WinningLotto(emptyList(), 0)
     }
 
     private fun printAllLottoTickets(
@@ -75,7 +76,7 @@ class GameController(
     }
 
     private fun printAutoTickets(autoLottoTickets: Int): List<LottoTicket> {
-        val autoTickets = (1..autoLottoTickets).map { AutoLottoGenerator().generate() }
+        val autoTickets = (1..autoLottoTickets).map { autoLottoGenerator.generate() }
         outputView.displayAutoLottoTicket(autoTickets)
         return autoTickets
     }
@@ -85,9 +86,8 @@ class GameController(
             return inputView.inputManualTicketCount()
         } catch (e: IllegalArgumentException) {
             outputView.displayInvalidInput(e.message)
-            purchaseManualTicketCount()
+            return purchaseManualTicketCount()
         }
-        return 0
     }
 
     private fun purchaseAmount(): Int {
@@ -96,8 +96,7 @@ class GameController(
             return purchase
         } catch (e: IllegalArgumentException) {
             outputView.displayInvalidInput(e.message)
-            purchaseAmount()
+            return purchaseAmount()
         }
-        return 0
     }
 }
