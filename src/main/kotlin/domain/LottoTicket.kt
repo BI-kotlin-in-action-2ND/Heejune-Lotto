@@ -7,8 +7,8 @@ open class LottoTicket(val numbers: List<Int>) {
         require(numbers.all { it in 1..45 }) { "로또 번호는 1부터 45 사이여야 합니다" }
     }
 
-    fun match(target: List<Int>): Int {
-        return numbers.count { it in target }
+    fun match(winningNumbers: List<Int>): Int {
+        return numbers.count { it in winningNumbers }
     }
 
     fun hasBonus(target: Int): Boolean {
