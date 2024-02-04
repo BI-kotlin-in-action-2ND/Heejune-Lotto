@@ -1,5 +1,9 @@
 package org.example
 
+import org.example.config.AppConfig
+import org.example.controller.GameController
+
 fun main() {
-    println("Hello World!")
+    val config = AppConfig()
+    GameController(config).start()
 }
