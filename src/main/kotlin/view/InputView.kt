@@ -27,11 +27,11 @@ object InputView {
             .map { LottoTicket(it) }
     }
 
-    fun inputWinningNumbers(): LottoTicket {
+    fun inputWinningNumbers(): List<Int> {
         println(WINNING_NUMBERS_MESSAGE)
-        return readln().split(',')
-            .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException(INVALID_INPUT_MESSAGE) }
-            .let { LottoTicket(it) }
+        return readlnOrNull()?.split(',')
+            ?.map { it.trim().toIntOrNull() ?: throw IllegalArgumentException(INVALID_INPUT_MESSAGE) }
+            ?: throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
     }
 
     fun inputBonusNumber(): Int {

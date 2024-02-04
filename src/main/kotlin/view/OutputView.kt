@@ -35,33 +35,35 @@ object OutputView {
         userLottoTickets.forEach { println(it.numbers.joinToString(NUMBERS_DELIMITER, PREFIX_MESSAGE, SUFFIX_MESSAGE)) }
     }
 
-    fun displayWinningNumbers(
-        winningNumbers: List<Int>,
-        bonusNumber: Int,
-    ) {
-        println("\n당첨 번호는 ${winningNumbers.joinToString(", ")} + 보너스 번호 $bonusNumber 입니다.")
+    fun displayPrizeResults(results: Map<PrizeCategory, Int>): Int {
+        var totalPrize = 0
+        println(RESULT_LOTTO)
+        PrizeCategory.entries.forEach { category ->
+            if (category != PrizeCategory.NONE) {
+                val count = results[category] ?: 0
+                val description = getCategoryDescription(category)
+                println("$description ${formatPrize(category.prize)}] - $count${RESULT_COUNT}")
+                totalPrize += category.prize * count
+            }
+        }
+        return totalPrize
     }
 
-    fun displayPrizeResults(results: Map<PrizeCategory, Int>) {
-        println(RESULT_LOTTO)
-        PrizeCategory.entries.forEachIndexed { index, category ->
-            results[category]?.let { count ->
-                if (category != PrizeCategory.NONE) {
-                    printResult(index + 1, category.prize, count)
-                }
-            }
+    private fun getCategoryDescription(category: PrizeCategory): String {
+        return when (category) {
+            PrizeCategory.FIRST -> "1등 [6개 번호 일치"
+            PrizeCategory.SECOND -> "2등 [5개 번호 일치, 보너스 번호 일치"
+            PrizeCategory.THIRD -> "3등 [5개 번호 일치"
+            PrizeCategory.FOURTH -> "4등 [4개 번호 일치"
+            PrizeCategory.NONE -> ""
         }
     }
 
-    private fun printResult(
-        rank: Int,
-        prize: Int,
-        count: Int,
-    ) {
-        println("$rank$RANK_BEHIND$prize$RESULT_PRIZE_KW$RESULT_COUNT $count$RESULT_COUNT")
+    private fun formatPrize(prize: Int): String {
+        return "(%,dKW)".format(prize)
     }
 
-    fun displayTotalPrize(
+    fun displayTotalEarning(
         totalPrize: Int,
         purchaseAmount: Int,
     ) {
