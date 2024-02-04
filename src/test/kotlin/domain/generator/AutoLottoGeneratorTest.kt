@@ -1,21 +1,20 @@
 package domain.generator
 
 import org.example.domain.generator.AutoLottoGenerator
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 class AutoLottoGeneratorTest {
     @Test
     fun `로또 번호 자동 생성 테스트`() {
         val generator = AutoLottoGenerator()
-        val lottoTicket = generator.generate()
 
-        // validate() 메소드가 true를 반환하는지 확인합니다.
-        assertTrue(lottoTicket.validate(), "로또 티켓의 유효성 검사 실패")
+        assertDoesNotThrow { generator.generate() }
 
-        // formattedNumbers()의 결과가 예상 형식과 일치하는지 확인합니다.
-        assertTrue(lottoTicket.formattedNumbers().matches(Regex("^([0-9]{2}, ){5}[0-9]{2}\$")), "로또 티켓의 포맷팅이 올바르지 않음")
+        assertTrue(
+            generator.generate().formattedNumbers().matches(Regex("^([0-9]{2}, ){5}[0-9]{2}\$")),
+            "로또 티켓의 포맷팅이 올바르지 않음",
+        )
     }
 
     @Test

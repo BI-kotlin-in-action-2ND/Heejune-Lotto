@@ -9,9 +9,8 @@ class LottoTicketTest {
     @Test
     fun `6개 고유 숫자 로또 티켓 유효성 테스트`() {
         val numbers = listOf(1, 2, 3, 4, 5, 6)
-        val lottoTicket = LottoTicket(numbers)
 
-        assertDoesNotThrow { lottoTicket.validate() }
+        assertDoesNotThrow { LottoTicket(numbers) }
     }
 
     @Test
@@ -20,7 +19,7 @@ class LottoTicketTest {
 
         val exception =
             assertThrows<IllegalArgumentException> {
-                LottoTicket(numbers).validate()
+                LottoTicket(numbers)
             }
 
         assertTrue(exception.message!!.contains("6개여야 합니다"))
@@ -32,7 +31,7 @@ class LottoTicketTest {
 
         val exception =
             assertThrows<IllegalArgumentException> {
-                LottoTicket(numbers).validate()
+                LottoTicket(numbers)
             }
 
         assertTrue(exception.message!!.contains("중복"))
@@ -44,7 +43,7 @@ class LottoTicketTest {
 
         val exception =
             assertThrows<IllegalArgumentException> {
-                LottoTicket(numbers).validate()
+                LottoTicket(numbers)
             }
 
         assertTrue(exception.message!!.contains("1부터 45"))
@@ -59,20 +58,20 @@ class LottoTicketTest {
 
     @Test
     fun `로또 보너스 매치 테스트`() {
-        val ticket = LottoTicket(listOf(10, 20, 30, 40, 50, 60))
+        val ticket = LottoTicket(listOf(10, 20, 30, 40, 41, 42))
         assertTrue(ticket.hasBonus(30))
     }
 
     @Test
     fun `로또 보너스 매치 실패 테스트`() {
-        val ticket = LottoTicket(listOf(11, 21, 31, 41, 51, 61))
+        val ticket = LottoTicket(listOf(11, 21, 31, 41, 42, 43))
         assertFalse(ticket.hasBonus(30))
     }
 
     @Test
     fun `로또 번호 정렬 테스트`() {
-        val ticket = LottoTicket(listOf(60, 50, 40, 30, 20, 10))
-        assertEquals(listOf(10, 20, 30, 40, 50, 60), ticket.sortedNumbers())
+        val ticket = LottoTicket(listOf(45, 43, 40, 30, 20, 10))
+        assertEquals(listOf(10, 20, 30, 40, 43, 45), ticket.sortedNumbers())
     }
 
     @Test

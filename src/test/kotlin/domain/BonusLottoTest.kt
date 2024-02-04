@@ -12,34 +12,32 @@ class BonusLottoTest {
         val numbers = listOf(1, 2, 3, 4, 5, 6)
         val bonusNumber = 7
 
-        val bonusLotto = BonusLotto(numbers, bonusNumber)
-
-        assertDoesNotThrow { bonusLotto.validate() }
+        assertDoesNotThrow { BonusLotto(numbers, bonusNumber) }
     }
 
     @Test
     fun `로또 번호 실패 테스트`() {
         assertTrue(
             assertThrows<IllegalArgumentException> {
-                BonusLotto(listOf(1, 2, 3, 4, 5), 7).validate()
+                BonusLotto(listOf(1, 2, 3, 4, 5), 7)
             }.message!!.contains("6개여야 합니다"),
         )
 
         assertTrue(
             assertThrows<IllegalArgumentException> {
-                BonusLotto(listOf(1, 2, 3, 4, 5, 5), 7).validate()
+                BonusLotto(listOf(1, 2, 3, 4, 5, 5), 7)
             }.message!!.contains("중복"),
         )
 
         assertTrue(
             assertThrows<IllegalArgumentException> {
-                BonusLotto(listOf(1, 2, 3, 4, 5, 46), 7).validate()
+                BonusLotto(listOf(1, 2, 3, 4, 5, 46), 7)
             }.message!!.contains("1부터 45"),
         )
 
         assertTrue(
             assertThrows<IllegalArgumentException> {
-                BonusLotto(listOf(0, 2, 3, 4, 5, 45), 7).validate()
+                BonusLotto(listOf(0, 2, 3, 4, 5, 45), 7)
             }.message!!.contains("1부터 45"),
         )
     }
@@ -49,9 +47,7 @@ class BonusLottoTest {
         val numbers = listOf(1, 2, 3, 4, 5, 6)
         val bonusNumber = 6
 
-        val bonusLotto = BonusLotto(numbers, bonusNumber)
-
-        val exception = assertThrows<IllegalArgumentException> { bonusLotto.validate() }
+        val exception = assertThrows<IllegalArgumentException> { BonusLotto(numbers, bonusNumber) }
         assertTrue(exception.message!!.contains("중복"))
     }
 
@@ -60,9 +56,7 @@ class BonusLottoTest {
         val numbers = listOf(1, 2, 3, 4, 5, 6)
         val bonusNumber = 46
 
-        val bonusLotto = BonusLotto(numbers, bonusNumber)
-
-        val exception = assertThrows<IllegalArgumentException> { bonusLotto.validate() }
+        val exception = assertThrows<IllegalArgumentException> { BonusLotto(numbers, bonusNumber) }
         assertTrue(exception.message!!.contains("1부터 45"))
     }
 }
