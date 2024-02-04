@@ -40,8 +40,20 @@ class GameController(
                 allLottoTickets,
                 winningLotto,
             ).calculateResults()
-        val totalEarning = outputView.displayPrizeResults(processResults(lottoGameResult))
-        outputView.displayTotalEarning(totalEarning, purchaseMoney)
+        val totalResult = processResults(lottoGameResult)
+        outputView.displayPrizeResults(totalResult)
+        outputView.displayTotalEarning(calculateTotalEarning(totalResult, purchaseMoney))
+    }
+
+    private fun calculateTotalEarning(
+        results: Map<PrizeCategory, Int>,
+        purchaseMoney: Int,
+    ): Double {
+        val totalEarning =
+            results.map { (category, count) ->
+                category.prize * count
+            }.sum()
+        return totalEarning.toDouble() / purchaseMoney
     }
 
     private fun processResults(results: List<Pair<Int, Boolean>>): Map<PrizeCategory, Int> {
