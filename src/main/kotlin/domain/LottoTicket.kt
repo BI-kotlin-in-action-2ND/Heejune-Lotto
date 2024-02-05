@@ -15,10 +15,6 @@ open class LottoTicket(val numbers: List<Int>) {
         return numbers.contains(target)
     }
 
-    fun sortedNumbers(): List<Int> {
-        return numbers.sorted()
-    }
-
     fun formattedNumbers(): String {
         return numbers.joinToString(", ") {
             it.toString().padStart(2, '0')
