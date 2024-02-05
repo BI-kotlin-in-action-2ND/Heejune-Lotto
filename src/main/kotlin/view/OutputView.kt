@@ -2,6 +2,7 @@ package org.example.view
 
 import org.example.domain.LottoTicket
 import org.example.domain.PrizeCategory
+import org.example.domain.WinningLotto
 
 object OutputView {
     private const val NUMBERS_DELIMITER = ", "
@@ -19,6 +20,8 @@ object OutputView {
     private const val RESULT_COUNT = "개"
     private const val RESULT_EARNINGS = "총 수익률은"
     private const val RESULT_EARNINGS_PERCENT = "%입니다."
+    private const val AUTO_WINNING_NUMBERS = "자동 생성된 당첨 번호:"
+    private const val AUTO_BONUS_NUMBER = "보너스 번호:"
 
     fun displayAutoLottoTicket(autoLottoTickets: List<LottoTicket>) {
         println(AUTO_LOTTO_TICKET)
@@ -30,12 +33,17 @@ object OutputView {
     }
 
     fun displayUserLottoTicket(
-        userLottoTickets: List<LottoTicket>,
-        userManualLottoTickets: List<LottoTicket>,
+        userAllLottoTickets: List<LottoTicket>,
+        autoTicketCount: Int,
+        manualTicketCount: Int,
     ) {
-        println(SUM_MANUAL_AUTO_TICKET.format(userManualLottoTickets.size, userLottoTickets.size))
+        println(SUM_MANUAL_AUTO_TICKET.format(autoTicketCount, manualTicketCount))
         println(TOTAL_USER_LOTTO)
-        userLottoTickets.forEach { println(it.numbers.joinToString(NUMBERS_DELIMITER, PREFIX_MESSAGE, SUFFIX_MESSAGE)) }
+        userAllLottoTickets.forEach {
+            println(
+                it.numbers.joinToString(NUMBERS_DELIMITER, PREFIX_MESSAGE, SUFFIX_MESSAGE),
+            )
+        }
     }
 
     fun displayPrizeResults(results: Map<PrizeCategory, Int>) {
@@ -69,5 +77,14 @@ object OutputView {
 
     fun displayInvalidInput(message: String?) {
         println(message)
+    }
+
+    fun displayAutomaticWinningNumbers(winningLotto: WinningLotto) {
+        println(AUTO_WINNING_NUMBERS)
+        println(
+            winningLotto.numbers.joinToString(NUMBERS_DELIMITER, PREFIX_MESSAGE, SUFFIX_MESSAGE),
+        )
+        println(AUTO_BONUS_NUMBER)
+        println(PREFIX_MESSAGE + winningLotto.bonusNumber + SUFFIX_MESSAGE)
     }
 }
