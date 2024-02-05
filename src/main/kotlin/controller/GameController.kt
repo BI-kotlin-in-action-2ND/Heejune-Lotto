@@ -28,7 +28,7 @@ class GameController(
         // 수동으로 구매할 티켓 번호 입력
         val manualTickets = inputManualTickets(manualTicketCount)
         // 자동 생성된 티켓 출력
-        val autoLottoTickets = printAutoTickets(purchaseMoney - manualTicketCount)
+        val autoLottoTickets = generateAutoLotto(purchaseMoney - manualTicketCount)
         // 전체 로또 티켓 출력
         val allLottoTickets = printAllLottoTickets(manualTickets, autoLottoTickets)
         // 당첨 번호 및 보너스 번호 입력 모드
@@ -102,7 +102,7 @@ class GameController(
         return manualTickets + autoLottoTickets
     }
 
-    private fun printAutoTickets(autoLottoTickets: Int): List<LottoTicket> {
+    private fun generateAutoLotto(autoLottoTickets: Int): List<LottoTicket> {
         val autoTickets = lottoService.autoLottoGenerator(autoLottoTickets)
         outputView.displayAutoLottoTicket(autoTickets)
         return autoTickets
