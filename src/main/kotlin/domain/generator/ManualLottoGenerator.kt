@@ -2,7 +2,7 @@ package org.example.domain.generator
 
 import org.example.domain.LottoTicket
 
-open class ManualLottoGenerator() : LottoGenerator {
+open class ManualLottoGenerator : LottoGenerator {
     fun generate(numbers: List<Int>): LottoTicket = LottoTicket(numbers.sorted())
 
     override fun generate(): LottoTicket {
