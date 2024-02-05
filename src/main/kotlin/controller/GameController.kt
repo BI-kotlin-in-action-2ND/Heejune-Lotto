@@ -43,7 +43,7 @@ class GameController(
                 winningLotto,
             ).calculateResults()
         printResult(lottoGameResult, purchaseMoney)
-        return lottoService.earningMoney(lottoGameResult)
+        return outputView.remainMoney(lottoService.earningMoney(lottoGameResult))
     }
 
     private fun selectWinningMode(): String {

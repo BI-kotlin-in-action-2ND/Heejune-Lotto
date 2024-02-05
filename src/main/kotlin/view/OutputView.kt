@@ -22,6 +22,7 @@ object OutputView {
     private const val RESULT_EARNINGS_PERCENT = "%입니다."
     private const val AUTO_WINNING_NUMBERS = "자동 생성된 당첨 번호:"
     private const val AUTO_BONUS_NUMBER = "보너스 번호:"
+    private const val REMAIN_MONEY = "남은 금액은 %d KW입니다."
 
     fun displayAutoLottoTicket(autoLottoTickets: List<LottoTicket>) {
         println(AUTO_LOTTO_TICKET)
@@ -80,5 +81,10 @@ object OutputView {
         println(winningLotto.formattedNumbers(NUMBERS_DELIMITER, PREFIX_MESSAGE, SUFFIX_MESSAGE))
         println(AUTO_BONUS_NUMBER)
         println(PREFIX_MESSAGE + winningLotto.bonusNumber + SUFFIX_MESSAGE)
+    }
+
+    fun remainMoney(earningMoney: Int): Int {
+        println(REMAIN_MONEY.format(earningMoney))
+        return earningMoney
     }
 }
