@@ -71,6 +71,6 @@ class LottoTicketTest {
     @Test
     fun `로또 번호 출력 포멧 테스트`() {
         val ticket = LottoTicket(listOf(1, 2, 3, 4, 5, 10))
-        assertEquals("01, 02, 03, 04, 05, 10", ticket.formattedNumbers())
+        assertEquals("01, 02, 03, 04, 05, 10", ticket.formattedNumbers(", ", "", ""))
     }
 }

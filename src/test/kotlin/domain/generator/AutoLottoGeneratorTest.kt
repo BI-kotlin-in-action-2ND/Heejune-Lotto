@@ -11,9 +11,12 @@ class AutoLottoGeneratorTest {
 
         assertDoesNotThrow { generator.generate() }
 
+        val generatedLottoTicket = generator.generate()
+        val formattedNumbers = generatedLottoTicket.formattedNumbers(", ", "[", "]")
+
         assertTrue(
-            generator.generate().formattedNumbers().matches(Regex("^([0-9]{2}, ){5}[0-9]{2}\$")),
-            "로또 티켓의 포맷팅이 올바르지 않음",
+            formattedNumbers.matches(Regex("^\\[\\d{2}, \\d{2}, \\d{2}, \\d{2}, \\d{2}, \\d{2}\\]$")),
+            "로또 티켓의 포맷팅이 올바르지 않음: $formattedNumbers",
         )
     }
 
