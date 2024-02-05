@@ -14,7 +14,6 @@ class AutoLottoGenerator(
 
     fun generateWinningNumbers(): WinningLotto {
         val numbers = numberRange.shuffled().take(numberCount).sorted()
-        // 보너스 번호는 당첨 번호와 중복되지 않는 숫자로 생성
         val bonusNumber = (numberRange - numbers.toSet()).shuffled().first()
         return WinningLotto(numbers, bonusNumber)
     }
