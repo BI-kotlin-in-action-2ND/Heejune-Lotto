@@ -26,9 +26,7 @@ object OutputView {
     fun displayAutoLottoTicket(autoLottoTickets: List<LottoTicket>) {
         println(AUTO_LOTTO_TICKET)
         autoLottoTickets.forEach {
-            println(
-                it.numbers.joinToString(NUMBERS_DELIMITER, PREFIX_MESSAGE, SUFFIX_MESSAGE),
-            )
+            println(it.formattedNumbers(NUMBERS_DELIMITER, PREFIX_MESSAGE, SUFFIX_MESSAGE))
         }
     }
 
@@ -40,9 +38,7 @@ object OutputView {
         println(SUM_MANUAL_AUTO_TICKET.format(autoTicketCount, manualTicketCount))
         println(TOTAL_USER_LOTTO)
         userAllLottoTickets.forEach {
-            println(
-                it.numbers.joinToString(NUMBERS_DELIMITER, PREFIX_MESSAGE, SUFFIX_MESSAGE),
-            )
+            println(it.formattedNumbers(NUMBERS_DELIMITER, PREFIX_MESSAGE, SUFFIX_MESSAGE))
         }
     }
 
@@ -81,9 +77,7 @@ object OutputView {
 
     fun displayAutomaticWinningNumbers(winningLotto: WinningLotto) {
         println(AUTO_WINNING_NUMBERS)
-        println(
-            winningLotto.numbers.joinToString(NUMBERS_DELIMITER, PREFIX_MESSAGE, SUFFIX_MESSAGE),
-        )
+        println(winningLotto.formattedNumbers(NUMBERS_DELIMITER, PREFIX_MESSAGE, SUFFIX_MESSAGE))
         println(AUTO_BONUS_NUMBER)
         println(PREFIX_MESSAGE + winningLotto.bonusNumber + SUFFIX_MESSAGE)
     }
