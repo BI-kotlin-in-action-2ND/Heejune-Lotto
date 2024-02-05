@@ -1,5 +1,6 @@
 package org.example.config
 
+import org.example.controller.UserInputController
 import org.example.domain.generator.AutoLottoGenerator
 import org.example.domain.generator.ManualLottoGenerator
 import org.example.service.LottoService
@@ -12,4 +13,5 @@ class AppConfig {
     val autoLottoGenerator = AutoLottoGenerator()
     val manualLottoGenerator = ManualLottoGenerator()
     val lottoService = LottoService(this)
+    val userInputController = UserInputController(this)
 }
