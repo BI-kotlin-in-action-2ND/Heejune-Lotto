@@ -33,9 +33,13 @@ class LottoService(
         totalResult: Map<PrizeCategory, Int>,
     ): Double {
         val totalEarning =
-            totalResult.map { (category, count) ->
-                category.prize * count
-            }.sum()
+            earningMoney(totalResult)
         return totalEarning.toDouble() / purchaseMoney
+    }
+
+    fun earningMoney(totalResult: Map<PrizeCategory, Int>): Int {
+        return totalResult.map { (category, count) ->
+            category.prize * count
+        }.sum()
     }
 }

@@ -20,9 +20,9 @@ class GameController(
         config.lottoService,
     )
 
-    fun start() {
+    fun start(remainMoney: Int = 0): Int {
         // 구매금액 입력
-        val purchaseMoney = inputPurchaseAmount()
+        val purchaseMoney = inputPurchaseAmount(remainMoney)
         // 수동으로 구매할 티켓 수 입력
         val manualTicketCount = inputManualTicketCount(purchaseMoney)
         // 수동으로 구매할 티켓 번호 입력
@@ -43,6 +43,7 @@ class GameController(
                 winningLotto,
             ).calculateResults()
         printResult(lottoGameResult, purchaseMoney)
+        return lottoService.earningMoney(lottoGameResult)
     }
 
     private fun selectWinningMode(): String {
@@ -116,13 +117,17 @@ class GameController(
         }
     }
 
-    private fun inputPurchaseAmount(): Int {
+    private fun inputPurchaseAmount(remainMoney: Int): Int {
+        if (remainMoney != 0) {
+            return remainMoney
+        }
+
         try {
             val purchase = inputView.inputPurchaseAmount()
             return purchase
         } catch (e: IllegalArgumentException) {
             outputView.displayInvalidInput(e.message)
-            return inputPurchaseAmount()
+            return inputPurchaseAmount(remainMoney)
         }
     }
 }
