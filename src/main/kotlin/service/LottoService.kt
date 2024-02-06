@@ -26,13 +26,7 @@ class LottoService(
     fun calculateTotalEarningPercentage(
         purchaseMoney: Int,
         totalResult: Map<PrizeCategory, Int>,
-    ): Double {
-        val totalEarning =
-            earningMoney(totalResult)
-        return totalEarning.toDouble() / purchaseMoney
-    }
+    ): Double = PrizeCategory.getTotalEarning(purchaseMoney, totalResult)
 
-    fun earningMoney(totalResult: Map<PrizeCategory, Int>): Int {
-        return totalResult.entries.sumOf { it.key.prize * it.value }
-    }
+    fun earningMoney(totalResult: Map<PrizeCategory, Int>): Int = PrizeCategory.earningMoney(totalResult)
 }

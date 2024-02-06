@@ -19,5 +19,16 @@ enum class PrizeCategory(val prize: Int) {
             matchCount == 4 -> FOURTH
             else -> NONE
         }
+
+        fun getTotalEarning(
+            purchaseMoney: Int,
+            totalResult: Map<PrizeCategory, Int>,
+        ): Double {
+            val totalEarning =
+                earningMoney(totalResult)
+            return totalEarning.toDouble() / purchaseMoney
+        }
+
+        fun earningMoney(totalResult: Map<PrizeCategory, Int>): Int = totalResult.entries.sumOf { it.key.prize * it.value }
     }
 }
