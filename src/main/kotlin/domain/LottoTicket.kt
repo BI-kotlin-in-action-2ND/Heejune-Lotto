@@ -1,5 +1,7 @@
 package org.example.domain
 
+import org.example.domain.check.LottoNumbersCheck
+
 open class LottoTicket(val numbers: List<Int>) {
     init {
         LottoNumbersCheck(numbers)
