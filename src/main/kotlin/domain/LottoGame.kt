@@ -1,15 +1,14 @@
 package org.example.domain
 
 class LottoGame(
-    private val userLottoTickets: List<LottoTicket>,
+    private val userLottoTickets: LottoTickets,
     private val winningLotto: WinningLotto,
 ) {
     fun calculateResults(): Map<PrizeCategory, Int> {
-        return userLottoTickets.map { lottoTicket ->
-            val matchCount = lottoTicket.match(winningLotto.numbers)
-            val hasBonus = lottoTicket.hasBonus(winningLotto.bonusNumber)
-            Pair(matchCount, hasBonus)
-        }.let(::checkRank)
+        val matchCounts = userLottoTickets.matchAll(winningLotto.numbers)
+        val hasBonuses = userLottoTickets.containsBonus(winningLotto.bonusNumber)
+        val results = matchCounts.zip(hasBonuses)
+        return checkRank(results)
     }
 
     private fun checkRank(results: List<Pair<Int, Boolean>>): Map<PrizeCategory, Int> {

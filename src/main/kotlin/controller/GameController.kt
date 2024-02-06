@@ -2,7 +2,7 @@ package org.example.controller
 
 import org.example.config.AppConfig
 import org.example.domain.LottoGame
-import org.example.domain.LottoTicket
+import org.example.domain.LottoTickets
 import org.example.domain.PrizeCategory
 import org.example.service.LottoService
 import org.example.view.InputView
@@ -65,18 +65,18 @@ class GameController(
     }
 
     private fun printAllLottoTickets(
-        manualTickets: List<LottoTicket>,
-        autoLottoTickets: List<LottoTicket>,
-    ): List<LottoTicket> {
+        manualTickets: LottoTickets,
+        autoLottoTickets: LottoTickets,
+    ): LottoTickets {
         outputView.displayUserLottoTicket(
-            manualTickets.plus(autoLottoTickets),
+            manualTickets + autoLottoTickets,
             manualTickets.size,
             autoLottoTickets.size,
         )
         return manualTickets + autoLottoTickets
     }
 
-    private fun generateAutoLotto(autoLottoTickets: Int): List<LottoTicket> {
+    private fun generateAutoLotto(autoLottoTickets: Int): LottoTickets {
         val autoTickets = lottoService.autoLottoGenerator(autoLottoTickets)
         outputView.displayAutoLottoTicket(autoTickets)
         return autoTickets

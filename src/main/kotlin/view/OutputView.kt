@@ -1,6 +1,6 @@
 package org.example.view
 
-import org.example.domain.LottoTicket
+import org.example.domain.LottoTickets
 import org.example.domain.PrizeCategory
 import org.example.domain.WinningLotto
 
@@ -24,23 +24,19 @@ object OutputView {
     private const val AUTO_BONUS_NUMBER = "보너스 번호:"
     private const val REMAIN_MONEY = "남은 금액은 %d KW입니다."
 
-    fun displayAutoLottoTicket(autoLottoTickets: List<LottoTicket>) {
+    fun displayAutoLottoTicket(autoLottoTickets: LottoTickets) {
         println(AUTO_LOTTO_TICKET)
-        autoLottoTickets.forEach {
-            println(it.formattedNumbers(NUMBERS_DELIMITER, PREFIX_MESSAGE, SUFFIX_MESSAGE))
-        }
+        autoLottoTickets.formattedTickets().forEach { println(it) }
     }
 
     fun displayUserLottoTicket(
-        userAllLottoTickets: List<LottoTicket>,
+        userAllLottoTickets: LottoTickets,
         autoTicketCount: Int,
         manualTicketCount: Int,
     ) {
         println(SUM_MANUAL_AUTO_TICKET.format(autoTicketCount, manualTicketCount))
         println(TOTAL_USER_LOTTO)
-        userAllLottoTickets.forEach {
-            println(it.formattedNumbers(NUMBERS_DELIMITER, PREFIX_MESSAGE, SUFFIX_MESSAGE))
-        }
+        userAllLottoTickets.formattedTickets().forEach { println(it) }
     }
 
     fun displayPrizeResults(results: Map<PrizeCategory, Int>) {

@@ -1,6 +1,6 @@
 package org.example.service
 
-import org.example.domain.LottoTicket
+import org.example.domain.LottoTickets
 import org.example.domain.PrizeCategory
 import org.example.domain.WinningLotto
 import org.example.domain.generator.AutoLottoGenerator
@@ -10,12 +10,13 @@ class LottoService(
     private val autoLottoGenerator: AutoLottoGenerator,
     private val manualLottoGenerator: ManualLottoGenerator,
 ) {
-    fun manualLottoGenerator(manualNumbers: List<List<Int>>): List<LottoTicket> {
+    fun manualLottoGenerator(manualNumbers: List<List<Int>>): LottoTickets {
         return manualLottoGenerator.generate(manualNumbers)
     }
 
-    fun autoLottoGenerator(purchaseMoney: Int): List<LottoTicket> {
-        return (1..purchaseMoney).map { autoLottoGenerator.generate() }
+    fun autoLottoGenerator(purchaseMoney: Int): LottoTickets {
+        val lottoTickets = (1..purchaseMoney).map { autoLottoGenerator.generate() }.toList()
+        return LottoTickets(lottoTickets)
     }
 
     fun autoWinningLottoGenerator(): WinningLotto {

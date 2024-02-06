@@ -1,7 +1,7 @@
 package org.example.controller
 
 import org.example.config.LottoConfig
-import org.example.domain.LottoTicket
+import org.example.domain.LottoTickets
 import org.example.domain.WinningLotto
 import org.example.service.LottoService
 import org.example.view.InputView
@@ -35,8 +35,8 @@ class UserInputController(
         }
     }
 
-    fun inputManualTickets(manualTicketCount: Int): List<LottoTicket> {
-        if (manualTicketCount == 0) return emptyList()
+    fun inputManualTickets(manualTicketCount: Int): LottoTickets {
+        if (manualTicketCount == 0) return LottoTickets(emptyList())
 
         try {
             val manualInput = inputView.inputManualTickets(manualTicketCount)
