@@ -5,8 +5,8 @@ class LottoGame(
     private val winningLotto: WinningLotto,
 ) {
     fun calculateResults(): Map<PrizeCategory, Int> {
-        val matchCounts = userLottoTickets.matchAll(winningLotto.numbers)
-        val hasBonuses = userLottoTickets.containsBonus(winningLotto.bonusNumber)
+        val matchCounts = userLottoTickets.matchAll(winningLotto)
+        val hasBonuses = userLottoTickets.containsBonus(winningLotto)
         val results = matchCounts.zip(hasBonuses)
         return checkRank(results)
     }
