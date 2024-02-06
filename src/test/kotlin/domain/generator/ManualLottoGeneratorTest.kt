@@ -13,7 +13,7 @@ class ManualLottoGeneratorTest {
 
         val lottoTicket = generator.generate(validNumbers)
 
-        assertEquals(validNumbers.map { it }, lottoTicket.map { it.numbers })
+        assertEquals(lottoTicket.get(0).numbers, validNumbers[0])
     }
 
     @Test

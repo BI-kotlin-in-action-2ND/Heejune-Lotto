@@ -11,7 +11,7 @@ class ManualLottoGeneratorKotest : StringSpec({
     "수동 로또 번호 생성 테스트" {
         val validNumbers = listOf(listOf(1, 2, 3, 4, 5, 6))
         val lottoTicket = generator.generate(validNumbers)
-        lottoTicket.map { it.numbers } shouldBe validNumbers
+        lottoTicket.get(0).numbers shouldBe validNumbers[0]
     }
 
     "수동 로또 번호 생성 중복 실패 테스트" {
