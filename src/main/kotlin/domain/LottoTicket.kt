@@ -12,7 +12,7 @@ open class LottoTicket(val numbers: List<Int>) {
     }
 
     fun hasBonus(target: Int): Boolean {
-        return target in numbers
+        return numbers.binarySearch(target) >= 0
     }
 
     fun formattedNumbers(
