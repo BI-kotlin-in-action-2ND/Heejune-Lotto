@@ -11,6 +11,8 @@ repositories {
 
 dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test")
+    // kotest
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:4.6.3")
 }
 
 tasks.test {
