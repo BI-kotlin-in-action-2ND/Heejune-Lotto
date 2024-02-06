@@ -5,13 +5,11 @@ class LottoGame(
     private val winningLotto: WinningLotto,
 ) {
     fun calculateResults(): Map<PrizeCategory, Int> {
-        val result: MutableList<Pair<Int, Boolean>> = mutableListOf()
-        userLottoTickets.forEach { lottoTicket ->
+        return userLottoTickets.map { lottoTicket ->
             val matchCount = lottoTicket.match(winningLotto.numbers)
             val hasBonus = lottoTicket.hasBonus(winningLotto.bonusNumber)
-            result.add(Pair(matchCount, hasBonus))
-        }
-        return checkRank(result)
+            Pair(matchCount, hasBonus)
+        }.let(::checkRank)
     }
 
     private fun checkRank(results: List<Pair<Int, Boolean>>): Map<PrizeCategory, Int> {
