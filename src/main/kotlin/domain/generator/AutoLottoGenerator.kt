@@ -1,12 +1,13 @@
 package org.example.domain.generator
 
+import org.example.config.LottoConfig
 import org.example.domain.LottoTicket
 import org.example.domain.WinningLotto
 
-class AutoLottoGenerator(
-    private val numberRange: IntRange = 1..45,
-    private val numberCount: Int = 6,
-) : LottoGenerator {
+class AutoLottoGenerator() : LottoGenerator {
+    private val numberRange = LottoConfig.START_NUMBER..LottoConfig.END_NUMBER
+    private val numberCount = LottoConfig.LOTTO_TICKET_SIZE
+
     override fun generate(): LottoTicket {
         val numbers = numberRange.shuffled().take(numberCount).sorted()
         return LottoTicket(numbers)

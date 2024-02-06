@@ -1,5 +1,6 @@
 package org.example.domain.generator
 
+import org.example.config.LottoConfig
 import org.example.domain.LottoTicket
 
 open class ManualLottoGenerator : LottoGenerator {
@@ -8,6 +9,6 @@ open class ManualLottoGenerator : LottoGenerator {
     }
 
     override fun generate(): LottoTicket {
-        throw UnsupportedOperationException("수동 로또 생성기는 수동으로 번호를 입력해야 합니다")
+        throw UnsupportedOperationException(LottoConfig.MANUAL_GENERATOR_NOT_SUPPORTED)
     }
 }
