@@ -24,7 +24,7 @@ class AutoLottoGeneratorKotest : FunSpec({
         val lottoTicket = generator.generate()
         val winningNumbers = lottoTicket.numbers
 
-        lottoTicket.match(winningNumbers) shouldBeExactly 6
+        lottoTicket.match(winningNumbers) shouldBeExactly LottoConfig.LOTTO_TICKET_SIZE
     }
 
     test("생성 로또 번호 범위 테스트") {

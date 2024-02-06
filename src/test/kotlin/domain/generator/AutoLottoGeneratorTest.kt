@@ -28,7 +28,7 @@ class AutoLottoGeneratorTest {
         val winningNumbers = lottoTicket.numbers
 
         // match 메소드의 결과가 기대하는 범위 내에 있는지 확인
-        assertEquals(6, lottoTicket.match(winningNumbers))
+        assertEquals(LottoConfig.LOTTO_TICKET_SIZE, lottoTicket.match(winningNumbers))
     }
 
     @Test
