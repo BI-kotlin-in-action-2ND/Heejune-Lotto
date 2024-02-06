@@ -38,8 +38,8 @@ class UserInputController(
         if (manualTicketCount == 0) return emptyList()
 
         try {
-            return inputView.inputManualTickets(manualTicketCount).map { lottoService.manualLottoGenerator(it) }
-                .toList()
+            val manualInput = inputView.inputManualTickets(manualTicketCount)
+            return lottoService.manualLottoGenerator(manualInput)
         } catch (e: IllegalArgumentException) {
             outputView.displayInvalidInput(e.message)
             return inputManualTickets(manualTicketCount)
