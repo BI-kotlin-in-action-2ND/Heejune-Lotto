@@ -1,6 +1,5 @@
 package org.example.service
 
-import org.example.config.AppConfig
 import org.example.domain.LottoTicket
 import org.example.domain.PrizeCategory
 import org.example.domain.WinningLotto
@@ -11,11 +10,6 @@ class LottoService(
     private val autoLottoGenerator: AutoLottoGenerator,
     private val manualLottoGenerator: ManualLottoGenerator,
 ) {
-    constructor(config: AppConfig) : this(
-        config.autoLottoGenerator,
-        config.manualLottoGenerator,
-    )
-
     fun manualLottoGenerator(manualNumbers: List<Int>): LottoTicket {
         return manualLottoGenerator.generate(manualNumbers)
     }
@@ -38,8 +32,6 @@ class LottoService(
     }
 
     fun earningMoney(totalResult: Map<PrizeCategory, Int>): Int {
-        return totalResult.map { (category, count) ->
-            category.prize * count
-        }.sum()
+        return totalResult.entries.sumOf { it.key.prize * it.value }
     }
 }

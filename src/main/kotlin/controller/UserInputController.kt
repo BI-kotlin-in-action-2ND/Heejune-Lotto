@@ -1,6 +1,5 @@
 package org.example.controller
 
-import org.example.config.AppConfig
 import org.example.domain.LottoTicket
 import org.example.domain.WinningLotto
 import org.example.service.LottoService
@@ -12,12 +11,6 @@ class UserInputController(
     private val outputView: OutputView,
     private val lottoService: LottoService,
 ) {
-    constructor(config: AppConfig) : this(
-        config.inputView,
-        config.outputView,
-        config.lottoService,
-    )
-
     fun inputManualTicketCount(purchaseMoney: Int): Int {
         try {
             return inputView.inputManualTicketCount(purchaseMoney)

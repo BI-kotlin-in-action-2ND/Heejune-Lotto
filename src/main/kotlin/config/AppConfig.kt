@@ -12,6 +12,6 @@ class AppConfig {
     val outputView = OutputView
     val autoLottoGenerator = AutoLottoGenerator()
     val manualLottoGenerator = ManualLottoGenerator()
-    val lottoService = LottoService(this)
-    val userInputController = UserInputController(this)
+    val lottoService = LottoService(autoLottoGenerator, manualLottoGenerator)
+    val userInputController = UserInputController(inputView, outputView, lottoService)
 }
