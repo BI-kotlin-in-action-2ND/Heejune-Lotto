@@ -8,11 +8,11 @@ open class LottoTicket(val numbers: List<Int>) {
     }
 
     fun match(winningNumbers: List<Int>): Int {
-        return numbers.count { it in winningNumbers }
+        return numbers.intersect(winningNumbers.toSet()).size
     }
 
     fun hasBonus(target: Int): Boolean {
-        return numbers.contains(target)
+        return target in numbers
     }
 
     fun formattedNumbers(
