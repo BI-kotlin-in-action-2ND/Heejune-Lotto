@@ -32,11 +32,10 @@ object InputView {
         }
     }
 
-    fun inputWinningNumbers(): List<Int> {
+    fun inputWinningNumbers(): List<Int>? {
         println(WINNING_NUMBERS_MESSAGE)
         return readlnOrNull()?.split(',')
-            ?.map { it.trim().toIntOrNull() ?: throw IllegalArgumentException(INVALID_INPUT_MESSAGE) }
-            ?: throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
+            ?.map { requireNotNull(it.trim().toIntOrNull()) { INVALID_INPUT_MESSAGE } }
     }
 
     fun inputBonusNumber(): Int {
