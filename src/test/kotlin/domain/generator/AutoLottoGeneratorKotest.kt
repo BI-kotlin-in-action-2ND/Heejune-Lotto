@@ -6,6 +6,7 @@ import io.kotest.matchers.collections.shouldBeSorted
 import io.kotest.matchers.ints.shouldBeExactly
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldMatch
+import org.example.config.LottoConfig
 import org.example.domain.generator.AutoLottoGenerator
 
 class AutoLottoGeneratorKotest : FunSpec({
@@ -27,8 +28,8 @@ class AutoLottoGeneratorKotest : FunSpec({
     }
 
     test("생성 로또 번호 범위 테스트") {
-        val numberRange = 1..45
-        val lottoTicket = AutoLottoGenerator(numberRange, 6).generate()
+        val numberRange = LottoConfig.START_NUMBER..LottoConfig.END_NUMBER
+        val lottoTicket = AutoLottoGenerator().generate()
 
         lottoTicket.numbers.all { it in numberRange }.shouldBeTrue()
     }

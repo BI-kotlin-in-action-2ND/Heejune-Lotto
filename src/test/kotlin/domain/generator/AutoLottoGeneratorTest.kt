@@ -1,5 +1,6 @@
 package domain.generator
 
+import org.example.config.LottoConfig
 import org.example.domain.generator.AutoLottoGenerator
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -32,8 +33,8 @@ class AutoLottoGeneratorTest {
 
     @Test
     fun `생성 로또 번호 범위 테스트`() {
-        val numberRange = 1..45
-        val generator = AutoLottoGenerator(numberRange, 6)
+        val numberRange = LottoConfig.START_NUMBER..LottoConfig.END_NUMBER
+        val generator = AutoLottoGenerator()
         val lottoTicket = generator.generate()
 
         assertTrue(lottoTicket.numbers.all { it in numberRange })
@@ -41,7 +42,7 @@ class AutoLottoGeneratorTest {
 
     @Test
     fun `생성 로또 번호 중복 테스트`() {
-        val generator = AutoLottoGenerator(1..45, 6)
+        val generator = AutoLottoGenerator()
         val lottoTicket = generator.generate()
 
         assertEquals(lottoTicket.numbers.distinct().size, lottoTicket.numbers.size)
@@ -49,7 +50,7 @@ class AutoLottoGeneratorTest {
 
     @Test
     fun `생성 로또 번호 정렬 테스트`() {
-        val generator = AutoLottoGenerator(1..45, 6)
+        val generator = AutoLottoGenerator()
         val lottoTicket = generator.generate()
 
         assertEquals(lottoTicket.numbers, lottoTicket.numbers.sorted())
