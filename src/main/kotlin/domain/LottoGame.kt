@@ -16,13 +16,7 @@ class LottoGame(
 
     private fun checkRank(results: List<Pair<Int, Boolean>>): Map<PrizeCategory, Int> {
         return results.groupBy { (matchCount, hasBonus) ->
-            when {
-                matchCount == 6 -> PrizeCategory.FIRST
-                matchCount == 5 && hasBonus -> PrizeCategory.SECOND
-                matchCount == 5 -> PrizeCategory.THIRD
-                matchCount == 4 -> PrizeCategory.FOURTH
-                else -> PrizeCategory.NONE
-            }
+            PrizeCategory.getRank(matchCount, hasBonus)
         }.mapValues { (_, value) -> value.size }.filterKeys { it != PrizeCategory.NONE }
     }
 }
