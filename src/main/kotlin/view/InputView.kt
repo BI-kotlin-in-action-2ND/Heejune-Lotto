@@ -1,6 +1,6 @@
 package org.example.view
 
-import java.util.*
+import java.util.Locale
 
 object InputView {
     private const val PURCHASE_AMOUNT_MESSAGE = "구입금액을 입력해 주세요."
