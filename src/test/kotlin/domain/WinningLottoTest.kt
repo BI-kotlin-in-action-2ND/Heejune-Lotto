@@ -1,6 +1,6 @@
 package domain
 
-import org.example.config.LottoConfig
+import org.example.constant.LottoConstant
 import org.example.domain.WinningLotto
 import org.junit.jupiter.api.Assertions.assertDoesNotThrow
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -20,7 +20,7 @@ class WinningLottoTest {
         assertTrue(
             assertThrows<IllegalArgumentException> {
                 WinningLotto(listOf(1, 2, 3, 4, 5), 7)
-            }.message!!.contains(LottoConfig.ERROR_MESSAGE_LOTTO_SIZE),
+            }.message!!.contains(LottoConstant.ERROR_MESSAGE_LOTTO_SIZE),
         )
     }
 
@@ -29,7 +29,7 @@ class WinningLottoTest {
         assertTrue(
             assertThrows<IllegalArgumentException> {
                 WinningLotto(listOf(1, 2, 3, 4, 5, 5), 7)
-            }.message!!.contains(LottoConfig.ERROR_MESSAGE_DUPLICATE),
+            }.message!!.contains(LottoConstant.ERROR_MESSAGE_DUPLICATE),
         )
     }
 
@@ -38,7 +38,7 @@ class WinningLottoTest {
         assertTrue(
             assertThrows<IllegalArgumentException> {
                 WinningLotto(listOf(1, 2, 3, 4, 5, 6), 6)
-            }.message!!.contains(LottoConfig.ERROR_MESSAGE_DUPLICATE),
+            }.message!!.contains(LottoConstant.ERROR_MESSAGE_DUPLICATE),
         )
     }
 
@@ -47,7 +47,7 @@ class WinningLottoTest {
         assertTrue(
             assertThrows<IllegalArgumentException> {
                 WinningLotto(listOf(1, 2, 3, 4, 5, 46), 7)
-            }.message!!.contains(LottoConfig.ERROR_MESSAGE_NUMBER_RANGE),
+            }.message!!.contains(LottoConstant.ERROR_MESSAGE_NUMBER_RANGE),
         )
     }
 
@@ -56,7 +56,7 @@ class WinningLottoTest {
         assertTrue(
             assertThrows<IllegalArgumentException> {
                 WinningLotto(listOf(0, 2, 3, 4, 5, 6), 7)
-            }.message!!.contains(LottoConfig.ERROR_MESSAGE_NUMBER_RANGE),
+            }.message!!.contains(LottoConstant.ERROR_MESSAGE_NUMBER_RANGE),
         )
     }
 
@@ -65,7 +65,7 @@ class WinningLottoTest {
         assertTrue(
             assertThrows<IllegalArgumentException> {
                 WinningLotto(listOf(1, 2, 3, 4, 5, 6), 0)
-            }.message!!.contains(LottoConfig.ERROR_MESSAGE_NUMBER_RANGE),
+            }.message!!.contains(LottoConstant.ERROR_MESSAGE_NUMBER_RANGE),
         )
     }
 
@@ -74,7 +74,7 @@ class WinningLottoTest {
         assertTrue(
             assertThrows<IllegalArgumentException> {
                 WinningLotto(listOf(1, 2, 3, 4, 5, 6), 46)
-            }.message!!.contains(LottoConfig.ERROR_MESSAGE_NUMBER_RANGE),
+            }.message!!.contains(LottoConstant.ERROR_MESSAGE_NUMBER_RANGE),
         )
     }
 }

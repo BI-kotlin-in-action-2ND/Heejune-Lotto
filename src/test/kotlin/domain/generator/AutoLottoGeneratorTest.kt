@@ -1,6 +1,6 @@
 package domain.generator
 
-import org.example.config.LottoConfig
+import org.example.constant.LottoConstant
 import org.example.domain.generator.AutoLottoGenerator
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -28,12 +28,12 @@ class AutoLottoGeneratorTest {
         val winningNumbers = lottoTicket.numbers
 
         // match 메소드의 결과가 기대하는 범위 내에 있는지 확인
-        assertEquals(LottoConfig.LOTTO_TICKET_SIZE, lottoTicket.match(winningNumbers))
+        assertEquals(LottoConstant.LOTTO_TICKET_SIZE, lottoTicket.match(winningNumbers))
     }
 
     @Test
     fun `생성 로또 번호 범위 테스트`() {
-        val numberRange = LottoConfig.START_NUMBER..LottoConfig.END_NUMBER
+        val numberRange = LottoConstant.START_NUMBER..LottoConstant.END_NUMBER
         val generator = AutoLottoGenerator()
         val lottoTicket = generator.generate()
 
