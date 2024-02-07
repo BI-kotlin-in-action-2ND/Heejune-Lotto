@@ -2,8 +2,8 @@ package org.example.controller
 
 import org.example.config.AppConfig
 import org.example.domain.LottoGame
+import org.example.domain.LottoResult
 import org.example.domain.LottoTickets
-import org.example.domain.PrizeCategory
 import org.example.service.LottoService
 import org.example.view.InputView
 import org.example.view.OutputView
@@ -57,11 +57,16 @@ class GameController(
     }
 
     private fun printResult(
-        totalResult: Map<PrizeCategory, Int>,
+        lottoResult: LottoResult,
         purchaseMoney: Int,
     ) {
-        outputView.displayPrizeResults(totalResult)
-        outputView.displayTotalEarning(lottoService.calculateTotalEarningPercentage(purchaseMoney, totalResult))
+        outputView.displayPrizeResults(lottoResult)
+        outputView.displayTotalEarning(
+            lottoService.calculateTotalEarningPercentage(
+                purchaseMoney,
+                lottoResult,
+            ),
+        )
     }
 
     private fun printAllLottoTickets(

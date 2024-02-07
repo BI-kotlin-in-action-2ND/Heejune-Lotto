@@ -1,5 +1,6 @@
 package org.example.view
 
+import org.example.domain.LottoResult
 import org.example.domain.LottoTickets
 import org.example.domain.PrizeCategory
 import org.example.domain.WinningLotto
@@ -39,11 +40,11 @@ object OutputView {
         userAllLottoTickets.formattedTickets().forEach { println(it) }
     }
 
-    fun displayPrizeResults(results: Map<PrizeCategory, Int>) {
+    fun displayPrizeResults(results: LottoResult) {
         println(RESULT_LOTTO)
         PrizeCategory.entries.forEach { category ->
             if (category != PrizeCategory.NONE) {
-                val count = results[category] ?: 0
+                val count = results.winningPrice[category] ?: 0
                 val description = getCategoryDescription(category)
                 println("$description ${formatPrize(category.prize)}] - $count${RESULT_COUNT}")
             }

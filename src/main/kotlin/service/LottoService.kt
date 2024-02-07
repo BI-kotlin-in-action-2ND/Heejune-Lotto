@@ -1,7 +1,7 @@
 package org.example.service
 
+import org.example.domain.LottoResult
 import org.example.domain.LottoTickets
-import org.example.domain.PrizeCategory
 import org.example.domain.WinningLotto
 import org.example.domain.generator.AutoLottoGenerator
 import org.example.domain.generator.ManualLottoGenerator
@@ -25,8 +25,8 @@ class LottoService(
 
     fun calculateTotalEarningPercentage(
         purchaseMoney: Int,
-        totalResult: Map<PrizeCategory, Int>,
-    ): Double = PrizeCategory.getTotalEarning(purchaseMoney, totalResult)
+        totalResult: LottoResult,
+    ): Double = totalResult.calculateTotalEarningPercentage(purchaseMoney)
 
-    fun earningMoney(totalResult: Map<PrizeCategory, Int>): Int = PrizeCategory.earningMoney(totalResult)
+    fun earningMoney(totalResult: LottoResult): Int = totalResult.earningMoney()
 }

@@ -22,13 +22,13 @@ enum class PrizeCategory(val prize: Int) {
 
         fun getTotalEarning(
             purchaseMoney: Int,
-            totalResult: Map<PrizeCategory, Int>,
+            totalResult: LottoResult,
         ): Double {
             val totalEarning =
                 earningMoney(totalResult)
             return totalEarning.toDouble() / purchaseMoney
         }
 
-        fun earningMoney(totalResult: Map<PrizeCategory, Int>): Int = totalResult.entries.sumOf { it.key.prize * it.value }
+        fun earningMoney(totalResult: LottoResult): Int = totalResult.winningPrice.entries.sumOf { it.key.prize * it.value }
     }
 }

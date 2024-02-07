@@ -4,16 +4,18 @@ class LottoGame(
     private val userLottoTickets: LottoTickets,
     private val winningLotto: WinningLotto,
 ) {
-    fun calculateResults(): Map<PrizeCategory, Int> {
+    fun calculateResults(): LottoResult {
         val matchCounts = userLottoTickets.matchAll(winningLotto)
         val hasBonuses = userLottoTickets.containsBonus(winningLotto)
         val results = matchCounts.zip(hasBonuses)
         return checkRank(results)
     }
 
-    private fun checkRank(results: List<Pair<Int, Boolean>>): Map<PrizeCategory, Int> {
-        return results.groupBy { (matchCount, hasBonus) ->
-            PrizeCategory.getRank(matchCount, hasBonus)
-        }.mapValues { (_, value) -> value.size }.filterKeys { it != PrizeCategory.NONE }
+    private fun checkRank(results: List<Pair<Int, Boolean>>): LottoResult {
+        val lottoResult =
+            results.groupBy { (matchCount, hasBonus) ->
+                PrizeCategory.getRank(matchCount, hasBonus)
+            }.mapValues { (_, value) -> value.size }.filterKeys { it != PrizeCategory.NONE }
+        return LottoResult(lottoResult)
     }
 }
