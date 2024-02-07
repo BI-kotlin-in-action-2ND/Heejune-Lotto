@@ -1,8 +1,8 @@
 package org.example.controller
 
 import org.example.config.AppConfig
+import org.example.domain.LottoPrizeCalculator
 import org.example.domain.LottoResult
-import org.example.domain.LottoResultCalculator
 import org.example.domain.LottoTickets
 import org.example.service.LottoService
 import org.example.view.InputView
@@ -38,13 +38,13 @@ class GameController(
         // 보너스 번호 입력
         val winningLotto = userInputController.inputWinningNumbers(winningMode)
         // 결과 출력
-        val lottoResultCalculatorResult =
-            LottoResultCalculator(
+        val lottoResultCalculatorPrize =
+            LottoPrizeCalculator(
                 allLottoTickets,
                 winningLotto,
             ).calculateResults()
-        printResult(lottoResultCalculatorResult, purchaseMoney)
-        return outputView.remainMoney(lottoService.earningMoney(lottoResultCalculatorResult))
+        printResult(lottoResultCalculatorPrize, purchaseMoney)
+        return outputView.remainMoney(lottoService.earningMoney(lottoResultCalculatorPrize))
     }
 
     private fun selectWinningMode(): String {
