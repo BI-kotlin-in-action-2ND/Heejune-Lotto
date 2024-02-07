@@ -1,6 +1,6 @@
-package org.example.config
+package org.example.constant
 
-object LottoConfig {
+object LottoConstant {
     const val START_NUMBER = 1
     const val END_NUMBER = 45
     const val LOTTO_TICKET_SIZE = 6

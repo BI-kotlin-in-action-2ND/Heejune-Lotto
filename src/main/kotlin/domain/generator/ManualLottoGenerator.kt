@@ -1,6 +1,6 @@
 package org.example.domain.generator
 
-import org.example.config.LottoConfig
+import org.example.constant.LottoConstant
 import org.example.domain.LottoTicket
 import org.example.domain.LottoTickets
 
@@ -12,6 +12,6 @@ open class ManualLottoGenerator : LottoGenerator {
     }
 
     override fun generate(): LottoTicket {
-        throw UnsupportedOperationException(LottoConfig.MANUAL_GENERATOR_NOT_SUPPORTED)
+        throw UnsupportedOperationException(LottoConstant.MANUAL_GENERATOR_NOT_SUPPORTED)
     }
 }

@@ -1,6 +1,6 @@
 package org.example.controller
 
-import org.example.config.LottoConfig
+import org.example.constant.LottoConstant
 import org.example.domain.LottoTickets
 import org.example.domain.WinningLotto
 import org.example.service.LottoService
@@ -48,7 +48,7 @@ class UserInputController(
     }
 
     fun inputWinningNumbers(winningMode: String): WinningLotto {
-        if (winningMode == LottoConfig.AUTO_MODE) {
+        if (winningMode == LottoConstant.AUTO_MODE) {
             return lottoService.autoWinningLottoGenerator().also { outputView.displayAutomaticWinningNumbers(it) }
         }
 

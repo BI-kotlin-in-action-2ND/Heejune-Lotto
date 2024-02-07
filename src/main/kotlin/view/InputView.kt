@@ -1,6 +1,6 @@
 package org.example.view
 
-import org.example.config.LottoConfig
+import org.example.constant.LottoConstant
 import java.util.Locale
 
 object InputView {
@@ -47,6 +47,6 @@ object InputView {
 
     fun readWinningNumbersMode(): String {
         println(WINNING_NUMBER_MODE)
-        return readlnOrNull()?.uppercase(Locale.getDefault()) ?: LottoConfig.BLANK
+        return readlnOrNull()?.uppercase(Locale.getDefault()) ?: LottoConstant.BLANK
     }
 }
