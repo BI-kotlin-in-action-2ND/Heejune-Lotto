@@ -19,16 +19,5 @@ enum class PrizeCategory(val prize: Int) {
             matchCount == 4 -> FOURTH
             else -> NONE
         }
-
-        fun getTotalEarning(
-            purchaseMoney: Int,
-            totalResult: LottoResult,
-        ): Double {
-            val totalEarning =
-                earningMoney(totalResult)
-            return totalEarning.toDouble() / purchaseMoney
-        }
-
-        fun earningMoney(totalResult: LottoResult): Int = totalResult.winningPrice.entries.sumOf { it.key.prize * it.value }
     }
 }
