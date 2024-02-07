@@ -1,6 +1,6 @@
 package org.example.domain
 
-class LottoGame(
+class LottoResultCalculator(
     private val userLottoTickets: LottoTickets,
     private val winningLotto: WinningLotto,
 ) {
