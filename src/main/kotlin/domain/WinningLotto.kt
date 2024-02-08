@@ -1,12 +1,12 @@
 package org.example.domain
 
-import org.example.domain.check.BonusLottoNumbersCheck
+import org.example.domain.check.BonusLottoNumbers
 
 class WinningLotto(
     numbers: List<Int>,
     val bonusNumber: Int,
-) : LottoTicket(numbers) {
+) : LottoTicket(numbers.sorted()) {
     init {
-        BonusLottoNumbersCheck(numbers + bonusNumber)
+        BonusLottoNumbers(numbers + bonusNumber)
     }
 }
