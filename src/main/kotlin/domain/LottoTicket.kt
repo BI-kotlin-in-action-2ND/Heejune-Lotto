@@ -1,8 +1,9 @@
 package org.example.domain
 
 import org.example.domain.check.LottoNumbers
+import java.util.TreeSet
 
-open class LottoTicket(val numbers: Set<Int>) {
+open class LottoTicket(val numbers: TreeSet<Int>) {
     init {
         LottoNumbers(numbers)
     }

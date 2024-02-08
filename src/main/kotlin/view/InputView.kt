@@ -2,6 +2,7 @@ package org.example.view
 
 import org.example.constant.LottoConstant
 import java.util.Locale
+import java.util.TreeSet
 
 object InputView {
     private const val PURCHASE_AMOUNT_MESSAGE = "구입금액을 입력해 주세요."
@@ -24,16 +25,20 @@ object InputView {
         )
     }
 
-    fun inputManualTickets(count: Int): List<Set<Int>> {
+    fun inputManualTickets(count: Int): List<TreeSet<Int>> {
         println(MANUAL_TICKET_NUMBERS_MESSAGE)
         return (1..count).map {
-            requireNotNull(readlnOrNull()?.split(',')?.map { it.trim().toInt() }?.toSet()) { INVALID_INPUT_MESSAGE }
+            requireNotNull(
+                readlnOrNull()?.split(',')?.map { input -> input.trim().toInt() }?.let { numbers -> TreeSet(numbers) },
+            ) { INVALID_INPUT_MESSAGE }
         }
     }
 
-    fun inputWinningNumbers(): Set<Int> {
+    fun inputWinningNumbers(): TreeSet<Int> {
         println(WINNING_NUMBERS_MESSAGE)
-        return requireNotNull(readlnOrNull()?.split(',')?.map { it.trim().toInt() }?.toSet()) { INVALID_INPUT_MESSAGE }
+        return requireNotNull(
+            readlnOrNull()?.split(',')?.map { input -> input.trim().toInt() }?.let { numbers -> TreeSet(numbers) },
+        ) { INVALID_INPUT_MESSAGE }
     }
 
     fun inputBonusNumber(): Int {
