@@ -13,7 +13,6 @@ open class LottoTicket(val numbers: TreeSet<Int>) {
     }
 
     fun hasBonus(target: Int): Boolean {
-//        return numbers.binarySearch(target) >= 0
         return numbers.contains(target)
     }
 
