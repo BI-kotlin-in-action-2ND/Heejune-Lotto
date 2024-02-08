@@ -28,21 +28,19 @@ object InputView {
         println(MANUAL_TICKET_NUMBERS_MESSAGE)
         return (1..count).map {
             readlnOrNull()?.split(',')
-                ?.map { it.trim().toIntOrNull() ?: throw IllegalArgumentException(INVALID_INPUT_MESSAGE) }
-                ?: throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
+                .map { requireNotNull(it.trim().toIntOrNull()) { INVALID_INPUT_MESSAGE } }
         }
     }
 
     fun inputWinningNumbers(): List<Int> {
         println(WINNING_NUMBERS_MESSAGE)
         return readlnOrNull()?.split(',')
-            ?.map { requireNotNull(it.trim().toIntOrNull()) { INVALID_INPUT_MESSAGE } }
-            ?: throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
+            .map { requireNotNull(it.trim().toIntOrNull()) { INVALID_INPUT_MESSAGE } }
     }
 
     fun inputBonusNumber(): Int {
         println(BONUS_NUMBER_MESSAGE)
-        return readlnOrNull()?.toIntOrNull() ?: throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
+        return requireNotNull(readlnOrNull()?.toIntOrNull()) { INVALID_INPUT_MESSAGE }
     }
 
     fun readWinningNumbersMode(): String {
