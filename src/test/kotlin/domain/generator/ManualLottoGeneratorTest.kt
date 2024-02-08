@@ -47,4 +47,38 @@ class ManualLottoGeneratorTest : StringSpec({
             generator.generate(lessThanSixNumbers)
         }
     }
+
+    "수동 로또 티켓 생성 테스트" {
+        val manualNumbers =
+            listOf(
+                TreeSet(listOf(1, 2, 3, 4, 5, 6)),
+                TreeSet(listOf(7, 8, 9, 10, 11, 12)),
+            )
+        val lottoTickets = generator.generateLottoTickets(manualNumbers)
+        lottoTickets.size shouldBe 2
+    }
+
+    "수동 로또 티켓 생성 중복 실패 테스트" {
+        val manualNumbers =
+            listOf(
+                TreeSet(listOf(1, 2, 3, 4, 5, 6)),
+                TreeSet(listOf(7, 8, 9, 10, 11, 12)),
+                TreeSet(listOf(1, 2, 3, 4, 5, 5)),
+            )
+        shouldThrowExactly<IllegalArgumentException> {
+            generator.generateLottoTickets(manualNumbers)
+        }
+    }
+
+    "수동 로또 티켓 생성 범위 실패 테스트" {
+        val manualNumbers =
+            listOf(
+                TreeSet(listOf(1, 2, 3, 4, 5, 6)),
+                TreeSet(listOf(7, 8, 9, 10, 11, 12)),
+                TreeSet(listOf(1, 2, 3, 4, 5, 46)),
+            )
+        shouldThrowExactly<IllegalArgumentException> {
+            generator.generateLottoTickets(manualNumbers)
+        }
+    }
 })
