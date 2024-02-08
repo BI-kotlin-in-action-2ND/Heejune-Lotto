@@ -4,11 +4,11 @@ import org.example.constant.LottoConstant
 import org.example.domain.LottoTicket
 import org.example.domain.WinningLotto
 
-class AutoLottoGenerator() : LottoGenerator {
+class AutoLottoGenerator() {
     private val numberRange = LottoConstant.START_NUMBER..LottoConstant.END_NUMBER
     private val numberCount = LottoConstant.LOTTO_TICKET_SIZE
 
-    override fun generate(): LottoTicket {
+    fun generate(): LottoTicket {
         val numbers = numberRange.shuffled().take(numberCount).sorted()
         return LottoTicket(numbers)
     }
