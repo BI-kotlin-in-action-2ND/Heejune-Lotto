@@ -12,12 +12,12 @@ import org.example.domain.WinningLotto
 class LottoPrizeCalculatorTest : FunSpec({
 
     context("LottoPrizeCalculator Result Calculation") {
-        val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val winningNumbers = setOf(1, 2, 3, 4, 5, 6)
         val bonusNumber = 7
         val winningLotto = WinningLotto(winningNumbers, bonusNumber)
 
         test("No matches result in no prizes") {
-            val userTickets = LottoTickets(listOf(LottoTicket(listOf(11, 12, 13, 14, 15, 16))))
+            val userTickets = LottoTickets(listOf(LottoTicket(setOf(11, 12, 13, 14, 15, 16))))
             val calculator = LottoPrizeCalculator(userTickets, winningLotto)
 
             val results = calculator.calculateResults()
@@ -35,7 +35,7 @@ class LottoPrizeCalculatorTest : FunSpec({
         }
 
         test("5 matches with bonus number yields second prize") {
-            val userTickets = LottoTickets(listOf(LottoTicket(listOf(1, 2, 3, 4, 5, bonusNumber))))
+            val userTickets = LottoTickets(listOf(LottoTicket(setOf(1, 2, 3, 4, 5, bonusNumber))))
             val calculator = LottoPrizeCalculator(userTickets, winningLotto)
 
             val results = calculator.calculateResults()
@@ -48,9 +48,9 @@ class LottoPrizeCalculatorTest : FunSpec({
                 LottoTickets(
                     listOf(
                         LottoTicket(winningNumbers),
-                        LottoTicket(listOf(1, 2, 3, 4, 5, bonusNumber)),
-                        LottoTicket(listOf(1, 2, 3, 4, 5, 8)),
-                        LottoTicket(listOf(11, 12, 13, 14, 15, 16)),
+                        LottoTicket(setOf(1, 2, 3, 4, 5, bonusNumber)),
+                        LottoTicket(setOf(1, 2, 3, 4, 5, 10)),
+                        LottoTicket(setOf(1, 2, 3, 4, 15, 16)),
                     ),
                 )
             val calculator = LottoPrizeCalculator(userTickets, winningLotto)
@@ -62,6 +62,7 @@ class LottoPrizeCalculatorTest : FunSpec({
                     PrizeCategory.FIRST to 1,
                     PrizeCategory.SECOND to 1,
                     PrizeCategory.THIRD to 1,
+                    PrizeCategory.FOURTH to 1,
                 ),
             )
         }

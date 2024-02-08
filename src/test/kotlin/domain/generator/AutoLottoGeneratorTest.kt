@@ -22,9 +22,8 @@ class AutoLottoGeneratorTest : FunSpec({
 
     test("match 메소드는 주어진 당첨 번호와 일치하는 번호의 개수를 반환한다") {
         val lottoTicket = generator.generate()
-        val winningNumbers = lottoTicket.numbers
 
-        lottoTicket.match(winningNumbers) shouldBeExactly LottoConstant.LOTTO_TICKET_SIZE
+        lottoTicket.match(lottoTicket) shouldBeExactly LottoConstant.LOTTO_TICKET_SIZE
     }
 
     test("생성 로또 번호 범위 테스트") {
@@ -44,5 +43,12 @@ class AutoLottoGeneratorTest : FunSpec({
         val lottoTicket = generator.generate()
 
         lottoTicket.numbers.shouldBeSorted()
+    }
+
+    test("로또 당첨 번호 생성 테스트") {
+        val winningLotto = generator.generateWinningNumbers()
+        val formattedNumbers = winningLotto.formattedNumbers(", ", "[", "]")
+
+        formattedNumbers shouldMatch Regex("^\\[\\d{2}, \\d{2}, \\d{2}, \\d{2}, \\d{2}, \\d{2}\\]$")
     }
 })
