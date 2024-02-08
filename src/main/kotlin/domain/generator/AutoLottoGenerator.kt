@@ -16,7 +16,7 @@ class AutoLottoGenerator() {
 
     fun generateWinningNumbers(): WinningLotto {
         val numbers = TreeSet(numberRange.shuffled().take(numberCount))
-        val bonusNumber = (numberRange - numbers.toSet()).shuffled().first()
+        val bonusNumber = (numberRange - numbers).random()
         return WinningLotto(numbers, bonusNumber)
     }
 }
