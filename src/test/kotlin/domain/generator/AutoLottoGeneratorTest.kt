@@ -13,7 +13,7 @@ class AutoLottoGeneratorTest : FunSpec({
 
     val generator = AutoLottoGenerator()
 
-    test("로또 번호 자동 생성 테스트") {
+    test("로또 번호 자동 생성 출력 테스트") {
         val generatedLottoTicket = generator.generate()
         val formattedNumbers = generatedLottoTicket.formattedNumbers(", ", "[", "]")
 
@@ -45,7 +45,7 @@ class AutoLottoGeneratorTest : FunSpec({
         lottoTicket.numbers.shouldBeSorted()
     }
 
-    test("로또 당첨 번호 생성 테스트") {
+    test("로또 당첨 번호 생성 출력 테스트") {
         val winningLotto = generator.generateWinningNumbers()
         val formattedNumbers = winningLotto.formattedNumbers(", ", "[", "]")
 
