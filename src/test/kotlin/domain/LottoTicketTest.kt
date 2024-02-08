@@ -1,76 +1,64 @@
 package domain
 
+import io.kotest.assertions.throwables.shouldThrowExactly
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldContain
 import org.example.domain.LottoTicket
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 
-class LottoTicketTest {
-    @Test
-    fun `6개 고유 숫자 로또 티켓 유효성 테스트`() {
+class LottoTicketTest : StringSpec({
+    "6개 고유 숫자 로또 티켓 유효성 테스트" {
         val numbers = listOf(1, 2, 3, 4, 5, 6)
-
-        assertDoesNotThrow { LottoTicket(numbers) }
+        LottoTicket(numbers).numbers shouldBe numbers
     }
 
-    @Test
-    fun `6개 미만 숫자 로또 실패 테스트`() {
+    "6개 미만 숫자 로또 실패 테스트" {
         val numbers = listOf(1, 2, 3, 4, 5)
-
         val exception =
-            assertThrows<IllegalArgumentException> {
+            shouldThrowExactly<IllegalArgumentException> {
                 LottoTicket(numbers)
             }
-
-        assertTrue(exception.message!!.contains("6개여야 합니다"))
+        exception.message shouldContain "6개여야 합니다"
     }
 
-    @Test
-    fun `중복 숫자 포함 로또 실패 테스트`() {
+    "중복 숫자 포함 로또 실패 테스트" {
         val numbers = listOf(1, 2, 3, 4, 5, 5)
-
         val exception =
-            assertThrows<IllegalArgumentException> {
+            shouldThrowExactly<IllegalArgumentException> {
                 LottoTicket(numbers)
             }
-
-        assertTrue(exception.message!!.contains("중복"))
+        exception.message shouldContain "중복"
     }
 
-    @Test
-    fun `범위를 벗어난 숫자 포함 로또 실패 테스트`() {
+    "범위를 벗어난 숫자 포함 로또 실패 테스트" {
         val numbers = listOf(1, 2, 3, 4, 5, 46)
-
         val exception =
-            assertThrows<IllegalArgumentException> {
+            shouldThrowExactly<IllegalArgumentException> {
                 LottoTicket(numbers)
             }
-
-        assertTrue(exception.message!!.contains("1부터 45"))
+        exception.message shouldContain "1부터 45"
     }
 
-    @Test
-    fun `로또 숫자 매치 테스트`() {
+    "로또 숫자 매치 테스트" {
         val ticket = LottoTicket(listOf(1, 2, 3, 4, 5, 6))
         val winningNumbers = listOf(4, 5, 6, 7, 8, 9)
-        assertEquals(3, ticket.match(winningNumbers))
+        ticket.match(winningNumbers) shouldBe 3
     }
 
-    @Test
-    fun `로또 보너스 매치 테스트`() {
+    "로또 보너스 매치 테스트" {
         val ticket = LottoTicket(listOf(10, 20, 30, 40, 41, 42))
-        assertTrue(ticket.hasBonus(30))
+        ticket.hasBonus(30).shouldBeTrue()
     }
 
-    @Test
-    fun `로또 보너스 매치 실패 테스트`() {
+    "로또 보너스 매치 실패 테스트" {
         val ticket = LottoTicket(listOf(11, 21, 31, 41, 42, 43))
-        assertFalse(ticket.hasBonus(30))
+        ticket.hasBonus(30).shouldBeFalse()
     }
 
-    @Test
-    fun `로또 번호 출력 포멧 테스트`() {
+    "로또 번호 출력 포멧 테스트" {
         val ticket = LottoTicket(listOf(1, 2, 3, 4, 5, 10))
-        assertEquals("01, 02, 03, 04, 05, 10", ticket.formattedNumbers(", ", "", ""))
+        ticket.formattedNumbers(", ", "", "") shouldBe "01, 02, 03, 04, 05, 10"
     }
-}
+})

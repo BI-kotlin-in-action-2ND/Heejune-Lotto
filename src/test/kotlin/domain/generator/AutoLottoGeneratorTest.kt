@@ -1,58 +1,48 @@
 package domain.generator
 
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.collections.shouldBeSorted
+import io.kotest.matchers.ints.shouldBeExactly
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldMatch
 import org.example.constant.LottoConstant
 import org.example.domain.generator.AutoLottoGenerator
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.Test
 
-class AutoLottoGeneratorTest {
-    @Test
-    fun `로또 번호 자동 생성 테스트`() {
-        val generator = AutoLottoGenerator()
+class AutoLottoGeneratorTest : FunSpec({
 
-        assertDoesNotThrow { generator.generate() }
+    val generator = AutoLottoGenerator()
 
+    test("로또 번호 자동 생성 테스트") {
         val generatedLottoTicket = generator.generate()
         val formattedNumbers = generatedLottoTicket.formattedNumbers(", ", "[", "]")
 
-        assertTrue(
-            formattedNumbers.matches(Regex("^\\[\\d{2}, \\d{2}, \\d{2}, \\d{2}, \\d{2}, \\d{2}\\]$")),
-            "로또 티켓의 포맷팅이 올바르지 않음: $formattedNumbers",
-        )
+        formattedNumbers shouldMatch Regex("^\\[\\d{2}, \\d{2}, \\d{2}, \\d{2}, \\d{2}, \\d{2}\\]$")
     }
 
-    @Test
-    fun `match 메소드는 주어진 당첨 번호와 일치하는 번호의 개수를 반환한다`() {
-        val generator = AutoLottoGenerator()
+    test("match 메소드는 주어진 당첨 번호와 일치하는 번호의 개수를 반환한다") {
         val lottoTicket = generator.generate()
         val winningNumbers = lottoTicket.numbers
 
-        // match 메소드의 결과가 기대하는 범위 내에 있는지 확인
-        assertEquals(LottoConstant.LOTTO_TICKET_SIZE, lottoTicket.match(winningNumbers))
+        lottoTicket.match(winningNumbers) shouldBeExactly LottoConstant.LOTTO_TICKET_SIZE
     }
 
-    @Test
-    fun `생성 로또 번호 범위 테스트`() {
+    test("생성 로또 번호 범위 테스트") {
         val numberRange = LottoConstant.START_NUMBER..LottoConstant.END_NUMBER
-        val generator = AutoLottoGenerator()
-        val lottoTicket = generator.generate()
+        val lottoTicket = AutoLottoGenerator().generate()
 
-        assertTrue(lottoTicket.numbers.all { it in numberRange })
+        lottoTicket.numbers.all { it in numberRange }.shouldBeTrue()
     }
 
-    @Test
-    fun `생성 로또 번호 중복 테스트`() {
-        val generator = AutoLottoGenerator()
+    test("생성 로또 번호 중복 테스트") {
         val lottoTicket = generator.generate()
 
-        assertEquals(lottoTicket.numbers.distinct().size, lottoTicket.numbers.size)
+        lottoTicket.numbers.distinct().size shouldBe lottoTicket.numbers.size
     }
 
-    @Test
-    fun `생성 로또 번호 정렬 테스트`() {
-        val generator = AutoLottoGenerator()
+    test("생성 로또 번호 정렬 테스트") {
         val lottoTicket = generator.generate()
 
-        assertEquals(lottoTicket.numbers, lottoTicket.numbers.sorted())
+        lottoTicket.numbers.shouldBeSorted()
     }
-}
+})
