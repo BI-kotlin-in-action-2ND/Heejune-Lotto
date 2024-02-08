@@ -11,7 +11,8 @@ class LottoService(
     private val manualLottoGenerator: ManualLottoGenerator,
 ) {
     fun manualLottoGenerator(manualNumbers: List<List<Int>>): LottoTickets {
-        return manualLottoGenerator.generate(manualNumbers)
+        val manualLottoTickets = manualNumbers.map { manualLottoGenerator.generate(it) }
+        return LottoTickets(manualLottoTickets)
     }
 
     fun autoLottoGenerator(purchaseMoney: Int): LottoTickets {

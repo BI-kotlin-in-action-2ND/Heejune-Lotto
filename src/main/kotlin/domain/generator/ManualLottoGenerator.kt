@@ -2,13 +2,10 @@ package org.example.domain.generator
 
 import org.example.constant.LottoConstant
 import org.example.domain.LottoTicket
-import org.example.domain.LottoTickets
 
 open class ManualLottoGenerator : LottoGenerator {
-    fun generate(manualNumbers: List<List<Int>>): LottoTickets {
-        return LottoTickets(
-            manualNumbers.map { LottoTicket(it) },
-        )
+    fun generate(manualNumbers: List<Int>): LottoTicket {
+        return LottoTicket(manualNumbers.sorted())
     }
 
     override fun generate(): LottoTicket {
