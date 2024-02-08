@@ -2,17 +2,18 @@ package org.example.domain
 
 import org.example.domain.check.LottoNumbers
 
-open class LottoTicket(val numbers: List<Int>) {
+open class LottoTicket(val numbers: Set<Int>) {
     init {
         LottoNumbers(numbers)
     }
 
-    fun match(winningNumbers: List<Int>): Int {
-        return numbers.intersect(winningNumbers.toSet()).size
+    fun match(winningNumbers: LottoTicket): Int {
+        return numbers.intersect(winningNumbers.numbers).size
     }
 
     fun hasBonus(target: Int): Boolean {
-        return numbers.binarySearch(target) >= 0
+//        return numbers.binarySearch(target) >= 0
+        return numbers.contains(target)
     }
 
     fun formattedNumbers(

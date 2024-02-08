@@ -24,18 +24,16 @@ object InputView {
         )
     }
 
-    fun inputManualTickets(count: Int): List<List<Int>> {
+    fun inputManualTickets(count: Int): List<Set<Int>> {
         println(MANUAL_TICKET_NUMBERS_MESSAGE)
         return (1..count).map {
-            readlnOrNull()?.split(',')
-                ?.map { it.trim().toInt() }
-                ?: throw IllegalArgumentException(INVALID_INPUT_MESSAGE)
+            requireNotNull(readlnOrNull()?.split(',')?.map { it.trim().toInt() }?.toSet()) { INVALID_INPUT_MESSAGE }
         }
     }
 
-    fun inputWinningNumbers(): List<Int> {
+    fun inputWinningNumbers(): Set<Int> {
         println(WINNING_NUMBERS_MESSAGE)
-        return requireNotNull(readlnOrNull()?.split(',')?.map { it.trim().toInt() }) { INVALID_INPUT_MESSAGE }
+        return requireNotNull(readlnOrNull()?.split(',')?.map { it.trim().toInt() }?.toSet()) { INVALID_INPUT_MESSAGE }
     }
 
     fun inputBonusNumber(): Int {

@@ -9,7 +9,7 @@ class LottoTickets(private val tickets: List<LottoTicket>) {
     }
 
     fun matchAll(winningNumbers: WinningLotto): List<Int> {
-        return tickets.map { it.match(winningNumbers.numbers) }
+        return tickets.map { it.match(winningNumbers) }
     }
 
     fun containsBonus(bonusNumber: WinningLotto): List<Boolean> {

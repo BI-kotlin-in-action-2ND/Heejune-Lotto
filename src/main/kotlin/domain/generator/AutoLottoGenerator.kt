@@ -9,12 +9,12 @@ class AutoLottoGenerator() {
     private val numberCount = LottoConstant.LOTTO_TICKET_SIZE
 
     fun generate(): LottoTicket {
-        val numbers = numberRange.shuffled().take(numberCount).sorted()
+        val numbers = numberRange.shuffled().take(numberCount).sorted().toSet()
         return LottoTicket(numbers)
     }
 
     fun generateWinningNumbers(): WinningLotto {
-        val numbers = numberRange.shuffled().take(numberCount).sorted()
+        val numbers = numberRange.shuffled().take(numberCount).sorted().toSet()
         val bonusNumber = (numberRange - numbers.toSet()).shuffled().first()
         return WinningLotto(numbers, bonusNumber)
     }

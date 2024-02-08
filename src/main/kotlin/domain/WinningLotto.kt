@@ -3,9 +3,9 @@ package org.example.domain
 import org.example.domain.check.BonusLottoNumbers
 
 class WinningLotto(
-    numbers: List<Int>,
+    numbers: Set<Int>,
     val bonusNumber: Int,
-) : LottoTicket(numbers.sorted()) {
+) : LottoTicket(numbers) {
     init {
         BonusLottoNumbers(numbers + bonusNumber)
     }
