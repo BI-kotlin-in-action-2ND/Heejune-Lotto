@@ -1,4 +1,4 @@
-package org.example.domain.check
+package org.example.domain.ticket
 
 import org.example.constant.LottoConstant
 
