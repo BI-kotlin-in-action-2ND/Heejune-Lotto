@@ -5,13 +5,13 @@ import org.example.domain.LottoTickets
 import org.example.domain.WinningLotto
 import org.example.domain.generator.AutoLottoGenerator
 import org.example.domain.generator.ManualLottoGenerator
-import java.util.TreeSet
+
 
 class LottoService(
     private val autoLottoGenerator: AutoLottoGenerator,
     private val manualLottoGenerator: ManualLottoGenerator,
 ) {
-    fun manualLottoGenerator(manualNumbers: List<TreeSet<Int>>): LottoTickets {
+    fun manualLottoGenerator(manualNumbers: List<Set<Int>>): LottoTickets {
         return manualLottoGenerator.generateLottoTickets(manualNumbers)
     }
 

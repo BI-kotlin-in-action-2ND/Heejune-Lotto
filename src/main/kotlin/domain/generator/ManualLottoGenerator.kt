@@ -2,14 +2,14 @@ package org.example.domain.generator
 
 import org.example.domain.LottoTicket
 import org.example.domain.LottoTickets
-import java.util.TreeSet
+
 
 open class ManualLottoGenerator {
-    fun generate(manualNumbers: TreeSet<Int>): LottoTicket {
+    fun generate(manualNumbers: Set<Int>): LottoTicket {
         return LottoTicket(manualNumbers)
     }
 
-    fun generateLottoTickets(manualNumbers: List<TreeSet<Int>>): LottoTickets {
+    fun generateLottoTickets(manualNumbers: List<Set<Int>>): LottoTickets {
         val lottoTickets = manualNumbers.map { generate(it) }.toList()
         return LottoTickets(lottoTickets)
     }
