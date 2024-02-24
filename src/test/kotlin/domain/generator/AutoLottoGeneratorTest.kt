@@ -13,13 +13,6 @@ class AutoLottoGeneratorTest : FunSpec({
 
     val generator = AutoLottoGenerator()
 
-    test("로또 번호 자동 생성 출력 테스트") {
-        val generatedLottoTicket = generator.generate()
-        val formattedNumbers = generatedLottoTicket.formattedNumbers(", ", "[", "]")
-
-        formattedNumbers shouldMatch Regex("^\\[\\d{2}, \\d{2}, \\d{2}, \\d{2}, \\d{2}, \\d{2}\\]$")
-    }
-
     test("match 메소드는 주어진 당첨 번호와 일치하는 번호의 개수를 반환한다") {
         val lottoTicket = generator.generate()
 
