@@ -7,16 +7,16 @@ import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import org.example.domain.LottoTicket
-import java.util.TreeSet
+
 
 class LottoTicketTest : StringSpec({
     "6개 고유 숫자 로또 티켓 유효성 테스트" {
-        val numbers = TreeSet(listOf(1, 2, 3, 4, 5, 6))
+        val numbers = setOf(1, 2, 3, 4, 5, 6)
         LottoTicket(numbers).numbers shouldBe numbers
     }
 
     "6개 미만 숫자 로또 실패 테스트" {
-        val numbers = TreeSet(listOf(1, 2, 3, 4, 5))
+        val numbers = setOf(1, 2, 3, 4, 5)
         val exception =
             shouldThrowExactly<IllegalArgumentException> {
                 LottoTicket(numbers)
@@ -25,7 +25,7 @@ class LottoTicketTest : StringSpec({
     }
 
     "중복 숫자 포함 로또 실패 테스트" {
-        val numbers = TreeSet(listOf(1, 2, 3, 4, 5, 5))
+        val numbers = setOf(1, 2, 3, 4, 5, 5)
         val exception =
             shouldThrowExactly<IllegalArgumentException> {
                 LottoTicket(numbers)
@@ -34,7 +34,7 @@ class LottoTicketTest : StringSpec({
     }
 
     "범위를 벗어난 숫자 포함 로또 실패 테스트" {
-        val numbers = TreeSet(listOf(1, 2, 3, 4, 5, 46))
+        val numbers = setOf(1, 2, 3, 4, 5, 46)
         val exception =
             shouldThrowExactly<IllegalArgumentException> {
                 LottoTicket(numbers)
@@ -43,23 +43,23 @@ class LottoTicketTest : StringSpec({
     }
 
     "로또 숫자 매치 테스트" {
-        val ticket = LottoTicket(TreeSet(listOf(1, 2, 3, 4, 5, 6)))
-        val winningNumbers = LottoTicket(TreeSet(listOf(4, 5, 6, 7, 8, 9)))
+        val ticket = LottoTicket(setOf(1, 2, 3, 4, 5, 6))
+        val winningNumbers = LottoTicket(setOf(4, 5, 6, 7, 8, 9))
         ticket.match(winningNumbers) shouldBe 3
     }
 
     "로또 보너스 매치 테스트" {
-        val ticket = LottoTicket(TreeSet(listOf(10, 20, 30, 40, 41, 42)))
+        val ticket = LottoTicket(setOf(10, 20, 30, 40, 41, 42))
         ticket.hasBonus(30).shouldBeTrue()
     }
 
     "로또 보너스 매치 실패 테스트" {
-        val ticket = LottoTicket(TreeSet(listOf(11, 21, 31, 41, 42, 43)))
+        val ticket = LottoTicket(setOf(11, 21, 31, 41, 42, 43))
         ticket.hasBonus(30).shouldBeFalse()
     }
 
     "로또 번호 출력 포멧 테스트" {
-        val ticket = LottoTicket(TreeSet(listOf(1, 2, 3, 4, 5, 10)))
+        val ticket = LottoTicket(setOf(1, 2, 3, 4, 5, 10))
         ticket.formattedNumbers(", ", "", "") shouldBe "01, 02, 03, 04, 05, 10"
     }
 })

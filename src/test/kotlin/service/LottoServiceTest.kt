@@ -8,14 +8,14 @@ import org.example.domain.PrizeCategory
 import org.example.domain.generator.AutoLottoGenerator
 import org.example.domain.generator.ManualLottoGenerator
 import org.example.service.LottoService
-import java.util.TreeSet
+
 
 class LottoServiceTest : StringSpec({
 
     "generate manual LottoTickets with provided numbers" {
         val manualNumbers =
             listOf(
-                TreeSet(listOf(1, 2, 3, 4, 5, 6)),
+                setOf(1, 2, 3, 4, 5, 6),
             )
         val manualLottoGenerator = ManualLottoGenerator()
         val autoLottoGenerator = AutoLottoGenerator()
