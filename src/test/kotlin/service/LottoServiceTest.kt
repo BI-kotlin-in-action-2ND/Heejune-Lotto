@@ -13,7 +13,7 @@ import org.example.service.LottoService
 
 class LottoServiceTest : StringSpec({
 
-    "generate manual LottoTickets with provided numbers" {
+    "수동 로또 번호 생성 테스트" {
         val manualNumbers =
             listOf(
                 setOf(1, 2, 3, 4, 5, 6),
@@ -28,7 +28,7 @@ class LottoServiceTest : StringSpec({
         result.get(0).numbers shouldBe manualNumbers.first().map { LottoNumber(it) }.toSet()
     }
 
-    "generate auto LottoTickets with provided purchase money" {
+    "구매 금액만큼 자동 로또 생성 테스트" {
         val purchaseMoney = 5
         val manualLottoGenerator = ManualLottoGenerator()
         val autoLottoGenerator = AutoLottoGenerator()
@@ -39,7 +39,7 @@ class LottoServiceTest : StringSpec({
         result.size shouldBe purchaseMoney
     }
 
-    "generate auto WinningLotto" {
+    "당첨 번호 생성 테스트" {
         val manualLottoGenerator = ManualLottoGenerator()
         val autoLottoGenerator = AutoLottoGenerator()
         val lottoService = LottoService(autoLottoGenerator, manualLottoGenerator)
@@ -49,7 +49,7 @@ class LottoServiceTest : StringSpec({
         result.numbers.size shouldBe 6
     }
 
-    "calculate total earning percentage correctly for known results" {
+    "결과에 대한 총 수익률 계산 테스트 - 백분율" {
         val purchaseMoney = 1000
         val winningPrice = mapOf(PrizeCategory.FIRST to 1)
         val totalPrize = PrizeCategory.FIRST.prize
@@ -65,7 +65,7 @@ class LottoServiceTest : StringSpec({
         result shouldBe (expectedPercentage plusOrMinus 0.01)
     }
 
-    "calculate total earning money correctly for known results" {
+    "결과에 대한 총 수익률 계산 테스트 - 총 수익" {
         val winningPrice = mapOf(PrizeCategory.FIRST to 1)
         val totalPrize = PrizeCategory.FIRST.prize
         val lottoResult = LottoResult(winningPrice)

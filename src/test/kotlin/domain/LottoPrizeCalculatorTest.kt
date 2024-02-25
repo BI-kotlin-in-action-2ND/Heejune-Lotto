@@ -12,13 +12,13 @@ import org.example.domain.ticket.WinningLotto
 
 class LottoPrizeCalculatorTest : FunSpec({
 
-    context("LottoPrizeCalculator Result Calculation") {
+    context("로또 당첨금 계산기 테스트") {
         val numbers = listOf(1, 2, 3, 4, 5, 6)
         val winningNumbers = numbers.map { LottoNumber(it) }.toSet()
         val bonusNumber = 7
         val winningLotto = WinningLotto(winningNumbers, bonusNumber)
 
-        test("No matches result in no prizes") {
+        test("모든 티켓이 당첨되지 않았을 때는 당첨금이 없어야 한다.") {
             val userNumbers = listOf(10, 20, 30, 40, 41, 42).map { LottoNumber(it) }.toSet()
             val userTickets = LottoTickets(listOf(LottoTicket(userNumbers)))
             val calculator = LottoPrizeCalculator(userTickets, winningLotto)
@@ -28,7 +28,7 @@ class LottoPrizeCalculatorTest : FunSpec({
             results.winningPrice.shouldBeEmpty()
         }
 
-        test("Exact match without bonus yields first prize") {
+        test("6개 숫자 일치 시 1등 당첨금을 받아야 한다.") {
             val userTickets = LottoTickets(listOf(LottoTicket(winningNumbers)))
             val calculator = LottoPrizeCalculator(userTickets, winningLotto)
 
@@ -37,7 +37,7 @@ class LottoPrizeCalculatorTest : FunSpec({
             results.winningPrice.shouldContainExactly(mapOf(PrizeCategory.FIRST to 1))
         }
 
-        test("5 matches with bonus number yields second prize") {
+        test("5개 숫자 일치 시 2등 당첨금을 받아야 한다.") {
             val userNumbers = listOf(1, 2, 3, 4, 5, bonusNumber).map { LottoNumber(it) }.toSet()
             val userTickets = LottoTickets(listOf(LottoTicket(userNumbers)))
             val calculator = LottoPrizeCalculator(userTickets, winningLotto)
@@ -47,7 +47,7 @@ class LottoPrizeCalculatorTest : FunSpec({
             results.winningPrice.shouldContainExactly(mapOf(PrizeCategory.SECOND to 1))
         }
 
-        test("Mixed ticket results yield correct prize distribution") {
+        test("4개 숫자 일치 시 3등 당첨금을 받아야 한다.") {
             val userTickets =
                 LottoTickets(
                     listOf(

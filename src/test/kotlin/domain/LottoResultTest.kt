@@ -9,7 +9,7 @@ import org.example.domain.PrizeCategory
 
 class LottoResultTest : FunSpec({
 
-    context("LottoResult functionality") {
+    context("LottoResult 유효성 검증") {
         val prizeCategory1 = PrizeCategory.FIRST
         val prizeCategory2 = PrizeCategory.SECOND
         val winningPrice =
@@ -19,12 +19,12 @@ class LottoResultTest : FunSpec({
             )
         val lottoResult = LottoResult(winningPrice)
 
-        test("earningMoney should calculate total prize money correctly") {
+        test("당첨금 총액을 계산해야 한다.") {
             val expectedTotalPrizeMoney = prizeCategory1.prize * 1 + prizeCategory2.prize * 2
             lottoResult.earningMoney() shouldBe expectedTotalPrizeMoney
         }
 
-        test("calculateTotalEarningPercentage should calculate the correct percentage of earnings") {
+        test("당첨금 총액을 구매금액 대비 백분율로 계산해야 한다.") {
             val purchaseAmount = 10_000
 
             val expectedEarningsPercentage =
