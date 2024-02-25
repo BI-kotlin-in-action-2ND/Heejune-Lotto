@@ -6,16 +6,16 @@ import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
-import org.example.constant.LottoConstant.END_NUMBER
 import org.example.constant.LottoConstant.ERROR_MESSAGE_LOTTO_INPUT
 import org.example.constant.LottoConstant.LOTTO_TICKET_SIZE
-import org.example.constant.LottoConstant.START_NUMBER
+import org.example.constant.LottoConstant.LottoMaxNumber
+import org.example.constant.LottoConstant.LottoMinNumber
 import org.example.domain.ticket.LottoNumber
 import org.example.domain.ticket.LottoTicket
 
 class LottoTicketTest : StringSpec({
-    val numbers = (START_NUMBER until START_NUMBER + LOTTO_TICKET_SIZE).toList()
-    val failingNumbers = (START_NUMBER until START_NUMBER + LOTTO_TICKET_SIZE - 1).toList()
+    val numbers = (LottoMinNumber until LottoMinNumber + LOTTO_TICKET_SIZE).toList()
+    val failingNumbers = (LottoMinNumber until LottoMinNumber + LOTTO_TICKET_SIZE - 1).toList()
     "6개 고유 숫자 로또 티켓 유효성 테스트" {
         val lottoNumber = numbers.map { LottoNumber(it) }.toSet()
         LottoTicket(lottoNumber).numbers shouldBe lottoNumber
@@ -31,7 +31,7 @@ class LottoTicketTest : StringSpec({
     }
 
     "중복 숫자 포함 로또 실패 테스트" {
-        val lottoNumber = failingNumbers.map { LottoNumber(it) }.toSet().plus(LottoNumber(START_NUMBER))
+        val lottoNumber = failingNumbers.map { LottoNumber(it) }.toSet().plus(LottoNumber(LottoMinNumber))
         val exception =
             shouldThrowExactly<IllegalArgumentException> {
                 LottoTicket(lottoNumber)
@@ -50,13 +50,13 @@ class LottoTicketTest : StringSpec({
     "로또 보너스 매치 테스트" {
         val lottoNumbers = numbers.map { LottoNumber(it) }.toSet()
         val ticket = LottoTicket(lottoNumbers)
-        ticket.hasBonus(START_NUMBER).shouldBeTrue()
+        ticket.hasBonus(LottoMinNumber).shouldBeTrue()
     }
 
     "로또 보너스 매치 실패 테스트" {
         val lottoNumbers = numbers.map { LottoNumber(it) }.toSet()
         val ticket = LottoTicket(lottoNumbers)
-        ticket.hasBonus(END_NUMBER).shouldBeFalse()
+        ticket.hasBonus(LottoMaxNumber).shouldBeFalse()
     }
 
     "로또 번호 출력 포멧 테스트" {

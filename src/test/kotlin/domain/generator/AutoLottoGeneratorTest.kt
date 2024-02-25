@@ -12,7 +12,7 @@ class AutoLottoGeneratorTest : FunSpec({
     val generator = AutoLottoGenerator()
 
     test("생성 로또 번호 범위 테스트") {
-        val numberRange = LottoConstant.START_NUMBER..LottoConstant.END_NUMBER
+        val numberRange = LottoConstant.LottoMinNumber..LottoConstant.LottoMaxNumber
         val lottoTicket = AutoLottoGenerator().generate()
 
         lottoTicket.numbers.all { it.number in numberRange }.shouldBeTrue()

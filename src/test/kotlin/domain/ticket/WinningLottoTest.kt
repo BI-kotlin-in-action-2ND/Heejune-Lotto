@@ -4,22 +4,22 @@ import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.string.shouldContain
 import org.example.constant.LottoConstant
-import org.example.constant.LottoConstant.END_NUMBER
 import org.example.constant.LottoConstant.LOTTO_TICKET_SIZE
-import org.example.constant.LottoConstant.START_NUMBER
+import org.example.constant.LottoConstant.LottoMaxNumber
+import org.example.constant.LottoConstant.LottoMinNumber
 import org.example.domain.ticket.LottoNumber
 import org.example.domain.ticket.WinningLotto
 import org.junit.jupiter.api.Assertions.assertDoesNotThrow
 
 class WinningLottoTest : FunSpec({
     context("WinningLotto 유효성 검증") {
-        val numbers = (START_NUMBER until START_NUMBER + LOTTO_TICKET_SIZE).toList()
-        val failingNumbers = (START_NUMBER until START_NUMBER + LOTTO_TICKET_SIZE - 1).toList()
+        val numbers = (LottoMinNumber until LottoMinNumber + LOTTO_TICKET_SIZE).toList()
+        val failingNumbers = (LottoMinNumber until LottoMinNumber + LOTTO_TICKET_SIZE - 1).toList()
 
         test("로또 및 보너스 생성 테스트") {
             val lottoNumbers = numbers.map { LottoNumber(it) }.toSet()
             assertDoesNotThrow {
-                WinningLotto(lottoNumbers, START_NUMBER + LOTTO_TICKET_SIZE)
+                WinningLotto(lottoNumbers, LottoMinNumber + LOTTO_TICKET_SIZE)
             }
         }
 
@@ -27,16 +27,7 @@ class WinningLottoTest : FunSpec({
             val lottoNumbers = failingNumbers.map { LottoNumber(it) }.toSet()
             val exception =
                 shouldThrowExactly<IllegalArgumentException> {
-                    WinningLotto(lottoNumbers, START_NUMBER + LOTTO_TICKET_SIZE)
-                }
-            exception.message shouldContain LottoConstant.ERROR_MESSAGE_LOTTO_INPUT
-        }
-
-        test("로또 번호 실패 테스트 - 중복 숫자") {
-            val lottoNumbers = numbers.map { LottoNumber(it) }.toSet().plus(LottoNumber(START_NUMBER))
-            val exception =
-                shouldThrowExactly<IllegalArgumentException> {
-                    WinningLotto(lottoNumbers, 7)
+                    WinningLotto(lottoNumbers, LottoMinNumber + LOTTO_TICKET_SIZE)
                 }
             exception.message shouldContain LottoConstant.ERROR_MESSAGE_LOTTO_INPUT
         }
@@ -45,25 +36,25 @@ class WinningLottoTest : FunSpec({
             val lottoNumbers = numbers.map { LottoNumber(it) }.toSet()
             val exception =
                 shouldThrowExactly<IllegalArgumentException> {
-                    WinningLotto(lottoNumbers, START_NUMBER)
+                    WinningLotto(lottoNumbers, LottoMinNumber)
                 }
             exception.message shouldContain LottoConstant.ERROR_MESSAGE_DUPLICATE_BONUS
         }
 
         test("로또 번호 실패 테스트 - 범위를 벗어난 숫자") {
-            val lottoNumbers = failingNumbers.map { LottoNumber(it) }.toSet().plus(LottoNumber(END_NUMBER + 1))
             val exception =
                 shouldThrowExactly<IllegalArgumentException> {
-                    WinningLotto(lottoNumbers, START_NUMBER + LOTTO_TICKET_SIZE)
+                    val lottoNumbers = failingNumbers.map { LottoNumber(it) }.toSet().plus(LottoNumber(LottoMaxNumber + 1))
+                    WinningLotto(lottoNumbers, LottoMinNumber + LOTTO_TICKET_SIZE)
                 }
             exception.message shouldContain LottoConstant.ERROR_MESSAGE_NUMBER_RANGE
         }
 
         test("로또 번호 실패 테스트 - 범위 아래 숫자") {
-            val lottoNumbers = failingNumbers.map { LottoNumber(it) }.toSet().plus(LottoNumber(START_NUMBER - 1))
             val exception =
                 shouldThrowExactly<IllegalArgumentException> {
-                    WinningLotto(lottoNumbers, START_NUMBER + LOTTO_TICKET_SIZE)
+                    val lottoNumbers = failingNumbers.map { LottoNumber(it) }.toSet().plus(LottoNumber(LottoMinNumber - 1))
+                    WinningLotto(lottoNumbers, LottoMinNumber + LOTTO_TICKET_SIZE)
                 }
             exception.message shouldContain LottoConstant.ERROR_MESSAGE_NUMBER_RANGE
         }
@@ -72,7 +63,7 @@ class WinningLottoTest : FunSpec({
             val lottoNumbers = numbers.map { LottoNumber(it) }.toSet()
             val exception =
                 shouldThrowExactly<IllegalArgumentException> {
-                    WinningLotto(lottoNumbers, START_NUMBER - 1)
+                    WinningLotto(lottoNumbers, LottoMinNumber - 1)
                 }
             exception.message shouldContain LottoConstant.ERROR_MESSAGE_NUMBER_RANGE
         }
@@ -81,7 +72,7 @@ class WinningLottoTest : FunSpec({
             val lottoNumbers = numbers.map { LottoNumber(it) }.toSet()
             val exception =
                 shouldThrowExactly<IllegalArgumentException> {
-                    WinningLotto(lottoNumbers, END_NUMBER + 1)
+                    WinningLotto(lottoNumbers, LottoMaxNumber + 1)
                 }
             exception.message shouldContain LottoConstant.ERROR_MESSAGE_NUMBER_RANGE
         }

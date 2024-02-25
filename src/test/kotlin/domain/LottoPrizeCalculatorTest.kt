@@ -4,7 +4,7 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.maps.shouldBeEmpty
 import io.kotest.matchers.maps.shouldContainExactly
 import org.example.constant.LottoConstant.LOTTO_TICKET_SIZE
-import org.example.constant.LottoConstant.START_NUMBER
+import org.example.constant.LottoConstant.LottoMinNumber
 import org.example.domain.LottoPrizeCalculator
 import org.example.domain.LottoTickets
 import org.example.domain.PrizeCategory
@@ -15,14 +15,14 @@ import org.example.domain.ticket.WinningLotto
 class LottoPrizeCalculatorTest : FunSpec({
 
     context("로또 당첨금 계산기 테스트") {
-        val numbers = (START_NUMBER until START_NUMBER + LOTTO_TICKET_SIZE).toList()
+        val numbers = (LottoMinNumber until LottoMinNumber + LOTTO_TICKET_SIZE).toList()
         val winningNumbers = numbers.map { LottoNumber(it) }.toSet()
-        val bonusNumber = START_NUMBER + LOTTO_TICKET_SIZE
+        val bonusNumber = LottoMinNumber + LOTTO_TICKET_SIZE
         val winningLotto = WinningLotto(winningNumbers, bonusNumber)
 
         test("당첨되지 않은 티켓은 당첨금이 없어야 한다.") {
             val userNumbers =
-                (START_NUMBER + LOTTO_TICKET_SIZE + 1 until START_NUMBER + LOTTO_TICKET_SIZE + 7).toList().map {
+                (LottoMinNumber + LOTTO_TICKET_SIZE + 1 until LottoMinNumber + LOTTO_TICKET_SIZE + 7).toList().map {
                     LottoNumber(
                         it,
                     )
@@ -64,7 +64,7 @@ class LottoPrizeCalculatorTest : FunSpec({
                         LottoTicket(winningNumbers),
                         LottoTicket(primaryNumbers.plus(bonusNumber).map { LottoNumber(it) }.toSet()),
                         LottoTicket(
-                            primaryNumbers.plus(START_NUMBER + LOTTO_TICKET_SIZE + 7).map { LottoNumber(it) }.toSet(),
+                            primaryNumbers.plus(LottoMinNumber + LOTTO_TICKET_SIZE + 7).map { LottoNumber(it) }.toSet(),
                         ),
                     ),
                 )
