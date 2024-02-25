@@ -4,7 +4,9 @@ import org.example.constant.LottoConstant
 import org.example.constant.LottoConstant.ERROR_MESSAGE_NUMBER_RANGE
 
 @JvmInline
-value class LottoNumber(private val number: Int) : Comparable<LottoNumber> {
+value class LottoNumber(
+    val number: Int,
+) : Comparable<LottoNumber> {
     init {
         require(number in (LottoConstant.START_NUMBER..LottoConstant.END_NUMBER)) { ERROR_MESSAGE_NUMBER_RANGE }
     }

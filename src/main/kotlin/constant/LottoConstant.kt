@@ -10,4 +10,5 @@ object LottoConstant {
     const val BLANK = ""
     const val AUTO_MODE = "A"
     const val PERCENTAGE = 100
+    const val ONE_HUNDRED = 100.0
 }
