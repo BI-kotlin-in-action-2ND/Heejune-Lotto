@@ -1,5 +1,7 @@
 package org.example.domain
 
+import org.example.LottoCheckRank
+
 class LottoPrizeCalculator(
     private val userLottoTickets: LottoTickets,
     private val winningLotto: WinningLotto,
@@ -8,14 +10,6 @@ class LottoPrizeCalculator(
         val matchCounts = userLottoTickets.matchAll(winningLotto)
         val hasBonuses = userLottoTickets.containsBonus(winningLotto)
         val results = matchCounts.zip(hasBonuses)
-        return checkRank(results)
-    }
-
-    private fun checkRank(results: List<Pair<Int, Boolean>>): LottoResult {
-        val lottoResult =
-            results.groupBy { (matchCount, hasBonus) ->
-                PrizeCategory.getRank(matchCount, hasBonus)
-            }.mapValues { (_, value) -> value.size }.filterKeys { it != PrizeCategory.NONE }
-        return LottoResult(lottoResult)
+        return LottoCheckRank(results).checkRank()
     }
 }
