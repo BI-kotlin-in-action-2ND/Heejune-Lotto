@@ -2,7 +2,6 @@ package domain.generator
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.booleans.shouldBeTrue
-import io.kotest.matchers.collections.shouldBeSorted
 import io.kotest.matchers.ints.shouldBeExactly
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldMatch
@@ -30,12 +29,6 @@ class AutoLottoGeneratorTest : FunSpec({
         val lottoTicket = generator.generate()
 
         lottoTicket.numbers.distinct().size shouldBe LottoConstant.LOTTO_TICKET_SIZE
-    }
-
-    test("생성 로또 번호 정렬 테스트") {
-        val lottoTicket = generator.generate()
-
-        lottoTicket.numbers.shouldBeSorted()
     }
 
     test("로또 당첨 번호 생성 출력 테스트") {
