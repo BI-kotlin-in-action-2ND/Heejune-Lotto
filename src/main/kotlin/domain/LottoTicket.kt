@@ -1,6 +1,6 @@
 package org.example.domain
 
-import org.example.domain.check.LottoNumbers
+import org.example.domain.ticket.LottoNumbers
 
 open class LottoTicket(val numbers: Set<Int>) {
     init {

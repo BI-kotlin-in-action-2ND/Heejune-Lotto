@@ -1,6 +1,6 @@
 package org.example.domain
 
-import org.example.domain.check.BonusLottoNumbers
+import org.example.domain.ticket.BonusLottoNumbers
 
 class WinningLotto(
     numbers: Set<Int>,
