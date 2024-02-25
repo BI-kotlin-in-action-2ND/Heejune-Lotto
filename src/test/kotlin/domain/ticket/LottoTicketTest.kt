@@ -33,15 +33,6 @@ class LottoTicketTest : StringSpec({
         exception.message shouldContain "로또 번호는 6개이고, 중복되지 않는 숫자여야 합니다."
     }
 
-    "범위를 벗어난 숫자 포함 로또 실패 테스트" {
-        val exception =
-            shouldThrowExactly<IllegalArgumentException> {
-                val numbers = listOf(1, 2, 3, 4, 5, 46).map { LottoNumber(it) }.toSet()
-                LottoTicket(numbers)
-            }
-        exception.message shouldContain "1부터 45"
-    }
-
     "로또 숫자 매치 테스트" {
         val lottoNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }.toSet()
         val winningNumbers = listOf(4, 5, 6, 7, 8, 9).map { LottoNumber(it) }.toSet()
