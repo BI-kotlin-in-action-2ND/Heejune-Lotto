@@ -29,7 +29,7 @@ class AutoLottoGeneratorTest : FunSpec({
     test("생성 로또 번호 중복 테스트") {
         val lottoTicket = generator.generate()
 
-        lottoTicket.numbers.distinct().size shouldBe lottoTicket.numbers.size
+        lottoTicket.numbers.distinct().size shouldBe LottoConstant.LOTTO_TICKET_SIZE
     }
 
     test("생성 로또 번호 정렬 테스트") {
