@@ -13,7 +13,8 @@ open class LottoTicket(val numbers: Set<LottoNumber>) {
     }
 
     fun hasBonus(target: Int): Boolean {
-        return numbers.contains(LottoNumber(target))
+        val targetNumber = LottoNumber(target)
+        return numbers.contains(targetNumber)
     }
 
     fun formattedNumbers(
