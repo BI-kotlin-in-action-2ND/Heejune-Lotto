@@ -1,11 +1,11 @@
-package org.example.domain
+package org.example.domain.ticket
 
-import org.example.domain.ticket.LottoNumber
-import org.example.domain.ticket.LottoNumbers
+import org.example.constant.LottoConstant.ERROR_MESSAGE_LOTTO_INPUT
+import org.example.constant.LottoConstant.LOTTO_TICKET_SIZE
 
 open class LottoTicket(val numbers: Set<LottoNumber>) {
     init {
-        LottoNumbers(numbers)
+        require(numbers.size == LOTTO_TICKET_SIZE) { ERROR_MESSAGE_LOTTO_INPUT }
     }
 
     fun match(winningNumbers: LottoTicket): Int {

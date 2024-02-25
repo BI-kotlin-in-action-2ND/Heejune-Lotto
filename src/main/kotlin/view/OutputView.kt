@@ -3,7 +3,7 @@ package org.example.view
 import org.example.domain.LottoResult
 import org.example.domain.LottoTickets
 import org.example.domain.PrizeCategory
-import org.example.domain.WinningLotto
+import org.example.domain.ticket.WinningLotto
 
 object OutputView {
     private const val NUMBERS_DELIMITER = ", "

@@ -1,8 +1,8 @@
 package org.example.domain.generator
 
-import org.example.domain.LottoTicket
 import org.example.domain.LottoTickets
 import org.example.domain.ticket.LottoNumber
+import org.example.domain.ticket.LottoTicket
 
 open class ManualLottoGenerator {
     fun generate(manualNumbers: Set<Int>): LottoTicket {

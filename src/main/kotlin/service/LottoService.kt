@@ -2,10 +2,9 @@ package org.example.service
 
 import org.example.domain.LottoResult
 import org.example.domain.LottoTickets
-import org.example.domain.WinningLotto
 import org.example.domain.generator.AutoLottoGenerator
 import org.example.domain.generator.ManualLottoGenerator
-
+import org.example.domain.ticket.WinningLotto
 
 class LottoService(
     private val autoLottoGenerator: AutoLottoGenerator,

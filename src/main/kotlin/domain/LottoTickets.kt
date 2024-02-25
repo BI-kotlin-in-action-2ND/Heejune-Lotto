@@ -1,5 +1,8 @@
 package org.example.domain
 
+import org.example.domain.ticket.LottoTicket
+import org.example.domain.ticket.WinningLotto
+
 class LottoTickets(private val tickets: List<LottoTicket>) {
     val size: Int
         get() = tickets.size

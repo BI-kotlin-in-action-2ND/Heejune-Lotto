@@ -1,9 +1,9 @@
 package org.example.domain.generator
 
 import org.example.constant.LottoConstant
-import org.example.domain.LottoTicket
-import org.example.domain.WinningLotto
 import org.example.domain.ticket.LottoNumber
+import org.example.domain.ticket.LottoTicket
+import org.example.domain.ticket.WinningLotto
 
 class AutoLottoGenerator() {
     private val numberRange = LottoConstant.START_NUMBER..LottoConstant.END_NUMBER

@@ -2,8 +2,8 @@ package org.example.controller
 
 import org.example.constant.LottoConstant
 import org.example.domain.LottoTickets
-import org.example.domain.WinningLotto
 import org.example.domain.ticket.LottoNumber
+import org.example.domain.ticket.WinningLotto
 import org.example.service.LottoService
 import org.example.view.InputView
 import org.example.view.OutputView
