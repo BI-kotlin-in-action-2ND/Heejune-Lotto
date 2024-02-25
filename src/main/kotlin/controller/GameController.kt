@@ -12,22 +12,22 @@ class GameController(
     private val inputView: InputView,
     private val outputView: OutputView,
     private val lottoService: LottoService,
-    private val userInputController: UserInputController,
+    private val lottoInputHandler: LottoInputHandler,
 ) {
     constructor(config: AppConfig) : this(
         config.inputView,
         config.outputView,
         config.lottoService,
-        config.userInputController,
+        config.lottoInputHandler,
     )
 
     fun start(remainMoney: Int = 0): Int {
         // 구매금액 입력
-        val purchaseMoney = userInputController.inputPurchaseAmount(remainMoney)
+        val purchaseMoney = lottoInputHandler.inputPurchaseAmount(remainMoney)
         // 수동으로 구매할 티켓 수 입력
-        val manualTicketCount = userInputController.inputManualTicketCount(purchaseMoney)
+        val manualTicketCount = lottoInputHandler.inputManualTicketCount(purchaseMoney)
         // 수동으로 구매할 티켓 번호 입력
-        val manualTickets = userInputController.inputManualTickets(manualTicketCount)
+        val manualTickets = lottoInputHandler.inputManualTickets(manualTicketCount)
         // 자동 생성된 티켓 출력
         val autoLottoTickets = generateAutoLotto(purchaseMoney - manualTicketCount)
         // 전체 로또 티켓 출력
@@ -36,7 +36,7 @@ class GameController(
         val winningMode = selectWinningMode()
         // 당첨 번호 입력
         // 보너스 번호 입력
-        val winningLotto = userInputController.inputWinningNumbers(winningMode)
+        val winningLotto = lottoInputHandler.inputWinningNumbers(winningMode)
         // 결과 출력
         val lottoResultCalculatorPrize =
             LottoPrizeCalculator(

@@ -8,7 +8,7 @@ import org.example.service.LottoService
 import org.example.view.InputView
 import org.example.view.OutputView
 
-class UserInputController(
+class LottoInputHandler(
     private val inputView: InputView,
     private val outputView: OutputView,
     private val lottoService: LottoService,
