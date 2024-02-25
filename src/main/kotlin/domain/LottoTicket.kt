@@ -1,8 +1,9 @@
 package org.example.domain
 
+import org.example.domain.ticket.LottoNumber
 import org.example.domain.ticket.LottoNumbers
 
-open class LottoTicket(val numbers: Set<Int>) {
+open class LottoTicket(val numbers: Set<LottoNumber>) {
     init {
         LottoNumbers(numbers)
     }
@@ -12,7 +13,7 @@ open class LottoTicket(val numbers: Set<Int>) {
     }
 
     fun hasBonus(target: Int): Boolean {
-        return numbers.contains(target)
+        return numbers.contains(LottoNumber(target))
     }
 
     fun formattedNumbers(
@@ -21,7 +22,7 @@ open class LottoTicket(val numbers: Set<Int>) {
         post: String,
     ): String {
         return numbers.joinToString(sep, pre, post) {
-            it.toString().padStart(2, '0')
+            it.number.toString().padStart(2, '0')
         }
     }
 }
