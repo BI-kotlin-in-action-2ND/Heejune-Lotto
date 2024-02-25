@@ -23,7 +23,7 @@ class AutoLottoGeneratorTest : FunSpec({
         val numberRange = LottoConstant.START_NUMBER..LottoConstant.END_NUMBER
         val lottoTicket = AutoLottoGenerator().generate()
 
-        lottoTicket.numbers.all { it in numberRange }.shouldBeTrue()
+        lottoTicket.numbers.all { it.number in numberRange }.shouldBeTrue()
     }
 
     test("생성 로또 번호 중복 테스트") {

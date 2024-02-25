@@ -3,12 +3,13 @@ package service
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.doubles.plusOrMinus
 import io.kotest.matchers.shouldBe
+import org.example.constant.LottoConstant.PERCENTAGE
 import org.example.domain.LottoResult
 import org.example.domain.PrizeCategory
 import org.example.domain.generator.AutoLottoGenerator
 import org.example.domain.generator.ManualLottoGenerator
+import org.example.domain.ticket.LottoNumber
 import org.example.service.LottoService
-
 
 class LottoServiceTest : StringSpec({
 
@@ -24,7 +25,7 @@ class LottoServiceTest : StringSpec({
         val result = lottoService.manualLottoGenerator(manualNumbers)
 
         result.size shouldBe 1
-        result.get(0).numbers shouldBe manualNumbers.first()
+        result.get(0).numbers shouldBe manualNumbers.first().map { LottoNumber(it) }.toSet()
     }
 
     "generate auto LottoTickets with provided purchase money" {
@@ -60,7 +61,7 @@ class LottoServiceTest : StringSpec({
 
         val result = lottoService.calculateTotalEarningPercentage(purchaseMoney, lottoResult)
 
-        val expectedPercentage = totalPrize.toDouble() / purchaseMoney
+        val expectedPercentage = totalPrize.toDouble() / purchaseMoney * PERCENTAGE
         result shouldBe (expectedPercentage plusOrMinus 0.01)
     }
 

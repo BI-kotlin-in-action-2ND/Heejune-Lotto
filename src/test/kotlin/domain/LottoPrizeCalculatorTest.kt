@@ -4,21 +4,23 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.maps.shouldBeEmpty
 import io.kotest.matchers.maps.shouldContainExactly
 import org.example.domain.LottoPrizeCalculator
-import org.example.domain.LottoTicket
 import org.example.domain.LottoTickets
 import org.example.domain.PrizeCategory
-import org.example.domain.WinningLotto
-
+import org.example.domain.ticket.LottoNumber
+import org.example.domain.ticket.LottoTicket
+import org.example.domain.ticket.WinningLotto
 
 class LottoPrizeCalculatorTest : FunSpec({
 
     context("LottoPrizeCalculator Result Calculation") {
-        val winningNumbers = setOf(1, 2, 3, 4, 5, 6)
+        val numbers = listOf(1, 2, 3, 4, 5, 6)
+        val winningNumbers = numbers.map { LottoNumber(it) }.toSet()
         val bonusNumber = 7
         val winningLotto = WinningLotto(winningNumbers, bonusNumber)
 
         test("No matches result in no prizes") {
-            val userTickets = LottoTickets(listOf(LottoTicket(setOf(10, 20, 30, 40, 41, 42))))
+            val userNumbers = listOf(10, 20, 30, 40, 41, 42).map { LottoNumber(it) }.toSet()
+            val userTickets = LottoTickets(listOf(LottoTicket(userNumbers)))
             val calculator = LottoPrizeCalculator(userTickets, winningLotto)
 
             val results = calculator.calculateResults()
@@ -36,7 +38,8 @@ class LottoPrizeCalculatorTest : FunSpec({
         }
 
         test("5 matches with bonus number yields second prize") {
-            val userTickets = LottoTickets(listOf(LottoTicket(setOf(1, 2, 3, 4, 5, bonusNumber))))
+            val userNumbers = listOf(1, 2, 3, 4, 5, bonusNumber).map { LottoNumber(it) }.toSet()
+            val userTickets = LottoTickets(listOf(LottoTicket(userNumbers)))
             val calculator = LottoPrizeCalculator(userTickets, winningLotto)
 
             val results = calculator.calculateResults()
@@ -49,9 +52,9 @@ class LottoPrizeCalculatorTest : FunSpec({
                 LottoTickets(
                     listOf(
                         LottoTicket(winningNumbers),
-                        LottoTicket(setOf(1, 2, 3, 4, 5, bonusNumber)),
-                        LottoTicket(setOf(1, 2, 3, 4, 5, 10)),
-                        LottoTicket(setOf(1, 2, 3, 4, 10, 20)),
+                        LottoTicket(listOf(1, 2, 3, 4, 5, bonusNumber).map { LottoNumber(it) }.toSet()),
+                        LottoTicket(listOf(1, 2, 3, 4, 5, 10).map { LottoNumber(it) }.toSet()),
+                        LottoTicket(listOf(1, 2, 3, 4, 10, 20).map { LottoNumber(it) }.toSet()),
                     ),
                 )
             val calculator = LottoPrizeCalculator(userTickets, winningLotto)

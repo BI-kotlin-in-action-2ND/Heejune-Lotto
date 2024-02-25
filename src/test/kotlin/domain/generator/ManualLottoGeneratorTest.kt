@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import org.example.domain.generator.ManualLottoGenerator
-
+import org.example.domain.ticket.LottoNumber
 
 class ManualLottoGeneratorTest : StringSpec({
     val generator = ManualLottoGenerator()
@@ -12,7 +12,7 @@ class ManualLottoGeneratorTest : StringSpec({
     "수동 로또 번호 생성 테스트" {
         val validNumbers = setOf(1, 2, 3, 4, 5, 6)
         val lottoTicket = generator.generate(validNumbers)
-        lottoTicket.numbers shouldBe validNumbers
+        lottoTicket.numbers shouldBe validNumbers.map { LottoNumber(it) }.toSet()
     }
 
     "수동 로또 번호 생성 중복 실패 테스트" {
