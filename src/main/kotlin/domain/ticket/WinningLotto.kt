@@ -1,9 +1,9 @@
 package org.example.domain.ticket
 
-import org.example.constant.LottoConstant.END_NUMBER
 import org.example.constant.LottoConstant.ERROR_MESSAGE_DUPLICATE_BONUS
 import org.example.constant.LottoConstant.ERROR_MESSAGE_NUMBER_RANGE
-import org.example.constant.LottoConstant.START_NUMBER
+import org.example.constant.LottoConstant.LottoMaxNumber
+import org.example.constant.LottoConstant.LottoMinNumber
 
 class WinningLotto(
     numbers: Set<LottoNumber>,
@@ -11,7 +11,7 @@ class WinningLotto(
 ) : LottoTicket(numbers) {
     init {
         require(numbers.duplicateCheck(bonusNumber)) { ERROR_MESSAGE_DUPLICATE_BONUS }
-        require(bonusNumber in (START_NUMBER..END_NUMBER)) { ERROR_MESSAGE_NUMBER_RANGE }
+        require(bonusNumber in (LottoMinNumber..LottoMaxNumber)) { ERROR_MESSAGE_NUMBER_RANGE }
     }
 }
 

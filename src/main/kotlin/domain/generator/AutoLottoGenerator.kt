@@ -6,7 +6,7 @@ import org.example.domain.ticket.LottoTicket
 import org.example.domain.ticket.WinningLotto
 
 class AutoLottoGenerator() {
-    private val numberRange = LottoConstant.START_NUMBER..LottoConstant.END_NUMBER
+    private val numberRange = LottoConstant.LottoMinNumber..LottoConstant.LottoMaxNumber
     private val numberCount = LottoConstant.LOTTO_TICKET_SIZE
 
     fun generate(): LottoTicket {
