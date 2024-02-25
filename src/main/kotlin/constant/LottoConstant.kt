@@ -9,4 +9,5 @@ object LottoConstant {
     const val ERROR_MESSAGE_NUMBER_RANGE = "로또 번호는 1부터 45 사이여야 합니다."
     const val BLANK = ""
     const val AUTO_MODE = "A"
+    const val PERCENTAGE = 100
 }
