@@ -1,7 +1,4 @@
-package org.example
-
-import org.example.domain.LottoResult
-import org.example.domain.PrizeCategory
+package org.example.domain
 
 class LottoCheckRank(private val results: List<Pair<Int, Boolean>>) {
     fun checkRank(): LottoResult {

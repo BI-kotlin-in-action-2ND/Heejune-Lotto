@@ -1,6 +1,5 @@
 package org.example.domain
 
-import org.example.LottoCheckRank
 import org.example.domain.ticket.WinningLotto
 
 class LottoPrizeCalculator(
